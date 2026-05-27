@@ -1,0 +1,2882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code for Law Firms &#8212; Best Legal Accelerator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&family=DM+Mono&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --red:     #e8192c;
+    --red-dark:#c01020;
+    --orange:  #f57c00;
+    --black:   #111111;
+    --white:   #ffffff;
+    --light:   #f7f7f7;
+    --gray:    #555555;
+    --border:  #dddddd;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Arial, 'Open Sans', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.6;
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    background: var(--black);
+    color: var(--white);
+    text-align: center;
+    font-size: 13px;
+    padding: 8px 1rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+  }
+
+  .topbar a { color: #f5c518; text-decoration: none; }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--white);
+    border-bottom: 2px solid var(--border);
+    padding: .8rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  }
+
+  .logo {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--black);
+    letter-spacing: -.01em;
+  }
+
+  .logo .accent { color: var(--red); }
+
+  .nav-links { display: flex; align-items: center; gap: 1.5rem; }
+  .nav-links a {
+    font-size: .85rem;
+    font-weight: 600;
+    color: var(--gray);
+    text-decoration: none;
+  }
+  .nav-links a:hover { color: var(--red); }
+
+  .nav-cta {
+    background: var(--red) !important;
+    color: var(--white) !important;
+    padding: 9px 20px !important;
+    border-radius: 3px;
+    font-weight: 700 !important;
+    font-size: .82rem !important;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--white);
+    text-align: center;
+    padding: 3.5rem 1.5rem 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: .6rem;
+    max-width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--black);
+  }
+
+  .hero-sub-red {
+    color: var(--orange);
+    font-size: 1rem;
+    font-weight: 700;
+    font-style: italic;
+    margin-bottom: 1.8rem;
+  }
+
+  .btn-red {
+    display: inline-block;
+    background: var(--red);
+    color: var(--white);
+    font-weight: 800;
+    font-size: 1.05rem;
+    padding: 16px 44px;
+    border-radius: 4px;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    transition: background .15s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-red:hover { background: var(--red-dark); }
+
+  .btn-red-outline {
+    display: inline-block;
+    background: transparent;
+    color: var(--red);
+    font-weight: 700;
+    font-size: .9rem;
+    padding: 11px 28px;
+    border-radius: 4px;
+    border: 2px solid var(--red);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    transition: all .15s;
+    cursor: pointer;
+  }
+
+  .btn-red-outline:hover { background: var(--red); color: var(--white); }
+
+  .hero-note {
+    margin-top: .9rem;
+    font-size: .82rem;
+    color: var(--gray);
+    font-weight: 600;
+  }
+
+  /* ── SECTION COMMON ── */
+  .section { padding: 3.5rem 1.5rem; }
+  .section-inner { max-width: 900px; margin: 0 auto; }
+  .section-bg { background: var(--light); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+  .section-eyebrow {
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--red);
+    text-align: center;
+    margin-bottom: .6rem;
+  }
+
+  .section h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: .5rem;
+    color: var(--black);
+    line-height: 1.2;
+  }
+
+  .section-sub {
+    text-align: center;
+    color: var(--gray);
+    font-size: .92rem;
+    max-width: 580px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.65;
+  }
+
+  /* ── PATH CARDS ── */
+  .path-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 640px) { .path-grid { grid-template-columns: 1fr; } }
+
+  .path-card {
+    background: var(--white);
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    padding: 2rem;
+    transition: border-color .2s, box-shadow .2s;
+  }
+
+  .path-card:hover {
+    border-color: var(--red);
+    box-shadow: 0 4px 20px rgba(232,25,44,.1);
+  }
+
+  .path-card.featured { border-color: var(--red); }
+
+  .card-badge {
+    display: inline-block;
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 3px;
+    margin-bottom: 1rem;
+  }
+
+  .badge-self { background: #e8f0ff; color: #1a4aaa; }
+  .badge-done { background: #ffeaea; color: var(--red); }
+
+  .path-card h3 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin-bottom: .5rem;
+    color: var(--black);
+  }
+
+  .path-card > p {
+    font-size: .88rem;
+    color: var(--gray);
+    margin-bottom: 1.3rem;
+    line-height: 1.65;
+  }
+
+  .path-card ul { list-style: none; margin-bottom: 1.6rem; }
+
+  .path-card ul li {
+    font-size: .86rem;
+    color: var(--black);
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .path-card ul li .ck { color: var(--red); font-weight: 700; flex-shrink: 0; }
+
+  /* ── STEPS ── */
+  .step {
+    display: flex;
+    gap: 1.4rem;
+    align-items: flex-start;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .step:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .step-num {
+    background: var(--red);
+    color: var(--white);
+    font-weight: 800;
+    font-size: 1rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .step-body { flex: 1; }
+
+  .step-time {
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: .3rem;
+  }
+
+  .step-body h3 {
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin-bottom: .4rem;
+    color: var(--black);
+  }
+
+  .step-body p {
+    font-size: .88rem;
+    color: var(--gray);
+    margin-bottom: .5rem;
+    line-height: 1.65;
+  }
+
+  .step-body p strong { color: var(--black); }
+
+  .code-box {
+    background: #1a1a1a;
+    color: #f0c040;
+    font-family: 'Menlo', 'Courier New', monospace;
+    font-size: .8rem;
+    padding: 11px 15px;
+    border-radius: 4px;
+    margin-top: .5rem;
+    line-height: 1.75;
+    overflow-x: auto;
+    white-space: pre;
+  }
+
+  .callout {
+    background: #fff8e1;
+    border-left: 4px solid var(--orange);
+    padding: 10px 14px;
+    font-size: .84rem;
+    color: #555;
+    margin-top: .8rem;
+    border-radius: 0 4px 4px 0;
+    line-height: 1.6;
+  }
+
+  .callout strong { color: var(--black); }
+
+  /* ── INTERVIEW DEMO ── */
+  .demo-wrap {
+    background: #1a1a1a;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 1.2rem;
+  }
+
+  .demo-top {
+    background: #2a2a2a;
+    padding: 9px 14px;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #f0c040;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .dot { width: 9px; height: 9px; border-radius: 50%; }
+  .dr { background: #ff5f57; } .dy { background: #febc2e; } .dg { background: #28c840; }
+
+  .demo-body { padding: 1.3rem; }
+
+  .chat { display: flex; gap: 10px; margin-bottom: .9rem; }
+
+  .chat-who {
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    min-width: 55px;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .chat-who.cl { color: #f0c040; }
+  .chat-who.at { color: #60d0a0; }
+
+  .chat-msg {
+    font-size: .83rem;
+    color: #c8c8c8;
+    background: #2a2a2a;
+    padding: 9px 13px;
+    border-radius: 0 6px 6px 6px;
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .chat-msg.atty { background: #0d2a1a; border-radius: 6px 0 6px 6px; }
+  .chat-msg strong { color: #ffffff; }
+
+  /* ── OUTPUT CARDS ── */
+  .out-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .out-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--red);
+    border-radius: 4px;
+    padding: 1.2rem;
+  }
+
+  .out-card .fname {
+    font-family: 'Courier New', monospace;
+    font-size: .72rem;
+    color: var(--red);
+    margin-bottom: .4rem;
+    font-weight: 700;
+  }
+
+  .out-card h4 { font-size: .95rem; font-weight: 700; margin-bottom: .3rem; }
+  .out-card p { font-size: .82rem; color: var(--gray); line-height: 1.5; }
+
+  /* ── TEAM CTA ── */
+  .team-cta {
+    background: var(--black);
+    color: var(--white);
+    border-radius: 6px;
+    padding: 3rem;
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+  }
+
+  .team-cta-left { flex: 1; min-width: 260px; }
+
+  .team-cta-left h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: .5rem;
+    color: var(--white);
+    line-height: 1.2;
+  }
+
+  .team-cta-left h3 .r { color: var(--red); }
+
+  .team-cta-left > p {
+    font-size: .88rem;
+    color: #aaaaaa;
+    margin-bottom: 1.2rem;
+    line-height: 1.65;
+  }
+
+  .team-cta-left ul { list-style: none; margin-bottom: 1.8rem; }
+
+  .team-cta-left ul li {
+    font-size: .86rem;
+    color: #dddddd;
+    padding: 6px 0;
+    border-bottom: 1px solid #333;
+    display: flex;
+    gap: 8px;
+  }
+
+  .team-cta-left ul li::before { content: '✅'; font-size: .8rem; flex-shrink: 0; }
+
+  .team-cta-right {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 1.8rem;
+    text-align: center;
+    min-width: 200px;
+  }
+
+  .team-cta-right .icon { font-size: 2.5rem; margin-bottom: .5rem; }
+  .team-cta-right strong {
+    display: block;
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: .3rem;
+  }
+  .team-cta-right p { font-size: .82rem; color: #aaa; line-height: 1.5; }
+
+  /* ── FREE TRAINING SECTION ── */
+  .training-section {
+    background: var(--black);
+    color: var(--white);
+    text-align: center;
+    padding: 4rem 1.5rem;
+    border-top: 4px solid var(--red);
+  }
+
+  .training-eyebrow {
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #f0c040;
+    margin-bottom: .8rem;
+  }
+
+  .training-section h2 {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: .5rem;
+    color: var(--white);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .training-italic {
+    color: var(--orange);
+    font-style: italic;
+    font-weight: 700;
+    font-size: .95rem;
+    margin-bottom: 2rem;
+  }
+
+  .training-bullets {
+    list-style: none;
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    text-align: left;
+  }
+
+  .training-bullets li {
+    font-size: .92rem;
+    color: #dddddd;
+    padding: 8px 0;
+    border-bottom: 1px solid #2a2a2a;
+    display: flex;
+    gap: 10px;
+    line-height: 1.5;
+  }
+
+  .training-bullets li::before {
+    content: '→';
+    color: var(--red);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .training-bullets li strong { color: var(--white); }
+
+  .training-urgency {
+    font-size: .85rem;
+    font-weight: 700;
+    color: #aaa;
+    margin-top: 1rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--light);
+    border-top: 1px solid var(--border);
+    padding: 1.8rem;
+    text-align: center;
+    font-size: .8rem;
+    color: var(--gray);
+  }
+
+  footer a { color: var(--red); text-decoration: none; font-weight: 600; }
+
+  @media (max-width: 600px) {
+    nav { padding: .8rem 1rem; }
+    .team-cta { padding: 1.8rem; }
+    .training-section { padding: 3rem 1rem; }
+  }
+
+  .skill-body pre{background:#1a1a1a;color:#e0e0e0;font-family:"DM Mono","Courier New",monospace;font-size:.76rem;line-height:1.7;padding:1rem;border-radius:4px;white-space:pre-wrap;overflow-x:auto;margin-bottom:.8rem;max-height:340px;overflow-y:auto}
+  .copy-btn{display:flex;align-items:center;gap:6px;font-size:.78rem;font-weight:700;color:var(--red);border:1px solid var(--red);background:var(--white);padding:7px 16px;border-radius:4px;cursor:pointer;transition:all .15s;text-transform:uppercase;letter-spacing:.04em}
+  .copy-btn:hover{background:var(--red);color:var(--white)}.copy-btn.copied{background:#1b5e20;border-color:#1b5e20;color:var(--white)}
+  .skill-card{background:var(--white);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:box-shadow .2s,border-color .2s}
+  .skill-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.1);border-color:var(--red)}
+  .skill-header{padding:1rem 1.1rem .8rem;cursor:pointer;display:flex;align-items:flex-start;justify-content:space-between;gap:.8rem;background:var(--light);border-bottom:1px solid var(--border)}
+  .skill-header:hover{background:#f0f0f0}.skill-title-group{flex:1}
+  .skill-icon{font-size:1.2rem;margin-bottom:.3rem;display:block}
+  .skill-name{font-size:.95rem;font-weight:700;color:var(--black);margin-bottom:.2rem}
+  .skill-when{font-size:.78rem;color:#888;line-height:1.45;font-style:italic}
+  .expand-btn{font-size:.72rem;font-weight:700;color:var(--red);border:1px solid var(--red);padding:4px 10px;border-radius:3px;flex-shrink:0;margin-top:2px;white-space:nowrap;background:var(--white);cursor:pointer;transition:all .15s}
+  .expand-btn:hover{background:var(--red);color:var(--white)}.skill-card.open .expand-btn{background:var(--red);color:var(--white)}
+  .skill-desc{padding:.8rem 1.1rem;font-size:.84rem;color:var(--gray);line-height:1.6;border-bottom:1px solid var(--border)}
+  .skill-body{display:none;padding:1rem 1.1rem}.skill-card.open .skill-body{display:block}
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+  .layer{padding:2.5rem 1.5rem;border-bottom:1px solid var(--border)}.layer-inner{max-width:960px;margin:0 auto}
+  .layer-header{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
+  .layer-badge{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:3px;flex-shrink:0;margin-top:3px}
+  .b0{background:#e8f0ff;color:#1a4aaa}.b1{background:#ffeaea;color:var(--red)}.b2{background:#e8f5e9;color:#1b5e20}.b3{background:#fff3e0;color:#e65100}
+  .layer-header-text h2{text-align:left;font-size:1.25rem;font-weight:800;margin-bottom:.25rem}
+  .layer-header-text p{font-size:.88rem;color:var(--gray);line-height:1.55;max-width:700px}
+  .security-note{background:#ffeaea;border:2px solid var(--red);border-radius:6px;padding:1.5rem;margin-bottom:1.5rem}
+  .security-note h3{font-size:.95rem;font-weight:800;margin-bottom:.5rem;color:var(--red)}
+  .master-prompt{background:#1a1a1a;border-left:5px solid var(--red);border-radius:6px;padding:1.5rem;margin-bottom:2rem}
+  .master-prompt h3{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#f5c518;margin-bottom:.8rem}
+  .master-prompt pre{font-family:"DM Mono","Courier New",monospace;font-size:.8rem;color:#e0e0e0;line-height:1.8;white-space:pre-wrap;margin-bottom:.8rem}
+  .how-section{background:#fff8e1;border-bottom:1px solid #ffe0b2;padding:1.8rem 1.5rem}
+  .how-inner{max-width:900px;margin:0 auto}.how-inner h2{font-size:1rem;font-weight:800;margin-bottom:.8rem}
+  .how-steps{display:flex;gap:1.5rem;flex-wrap:wrap}
+  .how-step{flex:1;min-width:180px;display:flex;gap:10px;align-items:flex-start}
+  .how-num{background:var(--red);color:var(--white);font-weight:800;font-size:.85rem;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+  .how-step p{font-size:.84rem;color:var(--gray);line-height:1.55}
+  .timeline-nav{background:var(--light);border-bottom:1px solid var(--border);padding:1rem 1.5rem;overflow-x:auto}
+  .timeline-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;min-width:500px}
+  .tn-step{display:flex;align-items:center;flex:1}
+  .tn-dot{width:32px;height:32px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;color:var(--gray);flex-shrink:0;text-decoration:none;transition:all .15s;cursor:pointer}
+  .tn-dot:hover{background:var(--red);color:var(--white)}.tn-label{font-size:.7rem;font-weight:600;color:var(--gray);margin-left:6px;white-space:nowrap}
+  .tn-line{flex:1;height:2px;background:var(--border);margin:0 4px}
+  .phase{padding:2.5rem 1.5rem;border-bottom:1px solid var(--border)}.phase:nth-child(even){background:var(--light)}
+  .phase-inner{max-width:960px;margin:0 auto}.phase-header{display:flex;align-items:flex-start;gap:1.2rem;margin-bottom:1.8rem}
+  .phase-num{background:var(--red);color:var(--white);font-weight:800;font-size:1.1rem;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .phase-title h2{font-size:1.2rem;font-weight:800;margin-bottom:.2rem}
+  .phase-title .time-badge{display:inline-block;background:#ffeaea;color:var(--red);font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:99px;text-transform:uppercase}
+  .phase-title p{font-size:.88rem;color:var(--gray);margin-top:.4rem;line-height:1.55}
+  .steps{display:flex;flex-direction:column;gap:1rem}
+  .step-row{display:flex;gap:1rem;background:var(--white);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+  .step-num-col{background:var(--red);color:var(--white);font-weight:800;font-size:.9rem;width:36px;min-width:36px;display:flex;align-items:flex-start;justify-content:center;padding-top:14px}
+  .step-body{padding:1rem 1rem 1rem 0;flex:1}.step-body h3{font-size:.92rem;font-weight:700;margin-bottom:.3rem}
+  .step-body p{font-size:.84rem;color:var(--gray);line-height:1.6;margin-bottom:.4rem}.step-body p strong{color:var(--black)}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+  .info-card{background:var(--white);border:1px solid var(--border);border-top:3px solid var(--red);border-radius:4px;padding:1rem}
+  .info-card h4{font-size:.88rem;font-weight:700;margin-bottom:.4rem}
+  .info-card p,.info-card li{font-size:.82rem;color:var(--gray);line-height:1.55}
+  .info-card ul{list-style:none}.info-card li{padding:4px 0;border-bottom:1px solid var(--border);display:flex;gap:7px}.info-card li:last-child{border-bottom:none}
+  .qr-wrap{padding:1.2rem;max-width:960px;margin:0 auto}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:.8rem}.three{grid-template-columns:1fr 1fr 1fr}
+  .card{background:var(--light);border:1px solid var(--border);border-top:3px solid var(--red);border-radius:4px;padding:1rem}
+  .card.dark{background:var(--black);color:var(--white)}.card h3{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:.7rem}
+  .card.dark h3{color:#f0c040}.card p,.card li{font-size:.8rem;color:var(--gray);line-height:1.6}
+  .num{background:var(--red);color:var(--white);font-weight:800;font-size:.62rem;width:17px;height:17px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+  .prompt-card{background:#1a1a1a;border:none;border-left:4px solid var(--red);border-radius:4px;padding:1rem;grid-column:1/-1}
+  .prompt-card h3{color:#f0c040;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem}
+  .prompt-text{font-family:"DM Mono","Courier New",monospace;font-size:.72rem;color:#e0e0e0;line-height:1.8;white-space:pre-wrap}
+  .training-box{background:var(--black);color:var(--white);border-radius:4px;padding:1rem 1.2rem;grid-column:1/-1;display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap}
+  .training-box .tb-text{flex:1;min-width:200px}.training-box h3{color:#f0c040;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem}
+  .training-box p{font-size:.8rem;color:#ccc;line-height:1.5}.training-box p strong{color:var(--white)}
+  .training-box .tb-btn{background:var(--red);color:var(--white);font-weight:700;font-size:.78rem;padding:10px 20px;border-radius:3px;text-decoration:none;white-space:nowrap;text-transform:uppercase}
+  .demo-wrap{background:#1a1a1a;border-radius:6px;overflow:hidden;margin-top:1.2rem}
+  .demo-top{background:#2a2a2a;padding:9px 14px;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#f0c040;display:flex;align-items:center;gap:7px}
+  .dot{width:9px;height:9px;border-radius:50%}.dr{background:#ff5f57}.dy{background:#febc2e}.dg{background:#28c840}
+  .demo-body{padding:1.3rem}.chat{display:flex;gap:10px;margin-bottom:.9rem}
+  .chat-who{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;min-width:55px;flex-shrink:0;padding-top:2px}
+  .chat-who.cl{color:#f0c040}.chat-who.at{color:#60d0a0}
+  .chat-msg{font-size:.83rem;color:#c8c8c8;background:#2a2a2a;padding:9px 13px;border-radius:0 6px 6px 6px;line-height:1.6;flex:1}
+  .chat-msg.atty{background:#0d2a1a;border-radius:6px 0 6px 6px}.chat-msg strong{color:#fff}
+  .ck{color:var(--red);font-weight:700;flex-shrink:0}
+  .download-bar{background:var(--black);color:var(--white);padding:2rem 1.5rem;text-align:center}
+  @media(max-width:640px){.path-grid,.two-col,.grid,.three{grid-template-columns:1fr}.team-cta{padding:1.5rem}nav{padding:.6rem 1rem}}
+</style>
+</head>
+<body>
+
+<div class="topbar">&#127891; 100% No-Cost Workshop For Lawyers &#8212; <a href="https://bestlegalaccelerator.com" target="_blank" style="color:#f5c518;font-weight:700">Get FREE Training Now &#8594;</a></div>
+
+<nav style="background:#fff;border-bottom:2px solid #ddd;padding:.8rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 2px 8px rgba(0,0,0,.08);flex-wrap:wrap;gap:.5rem">
+  <div class="logo" onclick="showPage('home')" style="cursor:pointer">&#128640; Best Legal <span>Accelerator</span></div>
+  <div style="display:flex;gap:.8rem;flex-wrap:wrap;align-items:center">
+    <a href="#" onclick="showPage('home'); return false;" style="font-size:.82rem;font-weight:600;color:#555;text-decoration:none">Setup Guide</a>
+    <a href="#" onclick="showPage('skills'); return false;" style="font-size:.82rem;font-weight:600;color:#555;text-decoration:none">Skills Library</a>
+    <a href="#" onclick="showPage('guide'); return false;" style="font-size:.82rem;font-weight:600;color:#555;text-decoration:none">How to Implement</a>
+    <a href="#" onclick="showPage('reference'); return false;" style="font-size:.82rem;font-weight:600;color:#555;text-decoration:none">Quick Reference</a>
+    <a href="#" onclick="showPage('apply'); return false;" style="background:#e8192c;color:#fff;padding:7px 14px;border-radius:3px;font-weight:700;font-size:.82rem;text-decoration:none">Done-For-You &#8594;</a>
+  </div>
+</nav>
+
+<div id="page-home" style="display:block">
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow">🤖 Claude Code AI Agents for Law Firms</p>
+  <h1>Build AI Agents That Run Your Law Firm —<br>Customized to YOUR State &amp; Practice Area</h1>
+  <p class="hero-sub-red" style="color:#f5c518;font-style:italic;font-weight:800;font-size:1.15rem;margin-bottom:1.8rem">(Without Coding, Without a Developer, Without Starting From Scratch)</p>
+  <a href="#choose-path" class="btn-red">Get Started Now →</a>
+  <p class="hero-note" style="font-size:1.1rem;font-weight:800;color:#fff;margin-top:1.2rem;white-space:nowrap">✅ Any Practice Area &nbsp;|&nbsp; ✅ Any State &nbsp;|&nbsp; ✅ No Coding Required</p>
+</div>
+
+<!-- CHOOSE PATH -->
+<div class="section" id="choose-path">
+  <div class="section-inner">
+    <p class="section-eyebrow">Choose Your Path</p>
+    <h2>How Do You Want To Get Started?</h2>
+    <p class="section-sub">Both paths end with AI agents running your intake, research, drafting, and operations. Pick what fits your time.</p>
+
+    <div class="path-grid">
+
+      <div class="path-card">
+        <span class="card-badge badge-self">Self-Service</span>
+        <h3>I'll Set It Up Myself</h3>
+        <p>Follow our step-by-step guide below. Claude interviews you about your firm and automatically builds your custom configuration — no tech skills needed whatsoever.</p>
+        <ul>
+          <li><span class="ck">✓</span> Takes about 45 minutes total</li>
+          <li><span class="ck">✓</span> Claude asks the questions — you just answer</li>
+          <li><span class="ck">✓</span> Customized to YOUR state's actual laws &amp; courts</li>
+          <li><span class="ck">✓</span> Works for PI, family law, criminal, business &amp; more</li>
+          <li><span class="ck">✓</span> Full security layer included — your data stays safe</li>
+          <li><span class="ck">✓</span> Full skill library included free</li>
+        </ul>
+        <a href="#self-setup" class="btn-red" style="display:block;text-align:center;font-size:.85rem;padding:13px">
+          Start the Step-by-Step Guide →
+        </a>
+      </div>
+
+      <div class="path-card featured">
+        <span class="card-badge badge-done">⭐ Done-For-You</span>
+        <h3>Our Team Does Everything For Me</h3>
+        <p>We configure everything, build your first tools, and manage it as your practice grows. Zero effort on your end.</p>
+        <ul>
+          <li><span class="ck">✓</span> We handle the entire setup — you do nothing</li>
+          <li><span class="ck">✓</span> Custom tools built for your exact workflows</li>
+          <li><span class="ck">✓</span> Monthly updates as state laws &amp; court rules change</li>
+          <li><span class="ck">✓</span> Ongoing support — your dedicated AI team</li>
+          <li><span class="ck">✓</span> Priority access to every new tool we release</li>
+        </ul>
+        <a href="#" onclick="showPage('apply'); return false;" target="_blank" class="btn-red" style="display:block;text-align:center;font-size:.85rem;padding:13px">
+          Apply for Done-For-You Setup →
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- SELF SETUP STEPS -->
+<div class="section section-bg" id="self-setup">
+  <div class="section-inner">
+    <p class="section-eyebrow">Step-by-Step Guide</p>
+    <h2>Set It Up Yourself — Plain English, No Coding</h2>
+    <p class="section-sub">Follow these 6 steps in order. Claude does the hard work automatically. You just answer questions about your firm.</p>
+
+    <!-- HOW SECURITY WORKS -->
+    <div style="background:#fff8e1;border:2px solid var(--orange);border-radius:6px;padding:1.5rem;margin-bottom:2.5rem">
+      <h3 style="font-size:1rem;font-weight:800;margin-bottom:.5rem;color:var(--black)">🔒 About Security — It's Built In Automatically</h3>
+      <p style="font-size:.88rem;color:#555;line-height:1.65;">You do <strong>not</strong> need to set up security separately. During Step 4 (the interview), Claude asks about your team and what data your tools will handle — then <strong>automatically generates a security configuration</strong> that covers credential protection, encryption, access controls, and audit logging. Every tool built afterward inherits these security standards automatically. The interview IS the security setup.</p>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <p class="step-time">⏱ 10 minutes</p>
+        <h3>Create Your Three Free Accounts</h3>
+        <p>You need three online accounts. You may already have some of these. Create each one, then come back here.</p>
+        <p><strong>① Anthropic</strong> (the company that makes Claude) — go to <strong>console.anthropic.com</strong> → Sign Up → go to <em>API Keys</em> in the left menu → click <em>Create Key</em> → name it "Law Firm" → <strong>copy the key and save it somewhere safe</strong> (you'll paste it in Step 2).</p>
+        <p><strong>② GitHub</strong> — go to <strong>github.com</strong> → Sign Up with your firm email. This is where your tools are stored and backed up. Think of it as a filing cabinet for your AI tools.</p>
+        <p><strong>③ Vercel</strong> — go to <strong>vercel.com</strong> → click <em>Continue with GitHub</em>. This makes your tools accessible on the internet so your staff can use them from any computer.</p>
+        <div class="callout">
+          💡 <strong>Simple analogy:</strong> Claude Code <em>builds</em> the tool. GitHub <em>stores</em> it safely. Vercel <em>runs</em> it so your team can use it from anywhere.
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <p class="step-time">⏱ 10 minutes</p>
+        <h3>Install Claude Code on Your Computer</h3>
+        <p>This is the only part that happens on your actual computer. You'll open a text window and paste two short commands — that's it.</p>
+        <p><strong>On a Mac:</strong> Press <strong>Command + Space</strong> on your keyboard → type <em>Terminal</em> → press Enter. A window opens with a blinking cursor.</p>
+        <p><strong>On Windows:</strong> Press the <strong>Windows key</strong> → type <em>Command Prompt</em> → press Enter.</p>
+        <p>Once the window is open, click inside it, paste this exactly, and press Enter:</p>
+        <div class="code-box">npm install -g @anthropic/claude-code</div>
+        <p style="margin-top:.7rem">Wait about 60 seconds while it installs. When you see a cursor again, paste this and press Enter:</p>
+        <div class="code-box">claude</div>
+        <p style="margin-top:.7rem">It will ask for your API key. Paste the one you saved from Step 1. Press Enter. You'll see a welcome message — Claude Code is ready.</p>
+        <div class="callout">
+          ⚠️ <strong>Seeing an error on the first command?</strong> You need to install Node.js first. Go to <strong>nodejs.org</strong> → click the big green "LTS" download button → run the installer → click Next through every screen → then try the command above again.
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <p class="step-time">⏱ 2 minutes</p>
+        <h3>Create Your Firm's Project Folder</h3>
+        <p>This is the folder where all your tools will live — intake forms, research agents, document drafters, everything. Paste the right command for your computer and press Enter:</p>
+        <div class="code-box"># On Mac — paste this:
+mkdir ~/LawFirmTools &amp;&amp; cd ~/LawFirmTools &amp;&amp; claude</div>
+        <div class="code-box" style="margin-top:.5rem"># On Windows — paste this:
+mkdir C:\LawFirmTools &amp;&amp; cd C:\LawFirmTools &amp;&amp; claude</div>
+        <p style="margin-top:.7rem">Claude Code is now open and pointed at your firm's folder. You're ready for the interview in Step 4.</p>
+      </div>
+    </div>
+
+    <!-- STEP 4 — THE INTERVIEW -->
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <p class="step-time">⏱ 10 minutes — this is where your customization happens</p>
+        <h3>Run the Firm Setup Interview (Copy &amp; Paste This)</h3>
+        <p>This is the key step. Copy <strong>all the text in the box below</strong> and paste it directly into Claude Code. Then just answer Claude's questions — it will interview you about your firm, your state, your courts, and your team. When you're done answering, it automatically generates your custom configuration files.</p>
+        <p><strong>This interview also sets up your security layer automatically</strong> — based on your team structure and data, Claude builds the right credential protection, encryption, access controls, and audit logging for your firm.</p>
+
+        <div class="code-box" style="color:#e0e0e0;font-size:.78rem;line-height:1.9;white-space:pre-wrap">You are helping me configure Claude Code for my law firm.
+Your goal is to interview me and produce three files:
+
+1. CLAUDE.md — my firm brain (context, rules, standards)
+2. config/jurisdiction.config.md — my state laws, SOLs, local court rules
+3. config/security.config.md — security layer (auto-generate based on my team)
+
+INTERVIEW RULES:
+- Ask questions ONE AT A TIME, conversationally
+- Explain briefly why you're asking before each question
+- Share relevant jurisdiction knowledge as we go (SOLs, court rules, etc.)
+- After all questions, generate all three files IN FULL — no placeholders
+
+COVER THESE TOPICS (one question at a time):
+- Firm name, primary state(s), and counties we serve
+- State courts, federal courts, or both
+- Practice areas (PI / Family Law / Criminal / Business / Estate / Other)
+- For my primary practice area: case types, acceptance criteria, key workflows
+- Primary courts I file in and any local rules that affect my work
+- Key statutes of limitations for my practice (fill in rest from state law)
+- CRM system (Clio / MyCase / Lawmatics / other / none)
+- Document storage (Google Drive / SharePoint / local / other)
+- Number of attorneys, paralegals, and staff — and their roles
+- My current intake process from first contact to signed retainer
+- Existing document templates and where they live
+- Citation format and tone preferences for client documents
+
+When done: generate all three files and tell me exactly
+where to save each one and what to do next.
+
+Start now with the first question.</div>
+
+        <div class="callout">
+          💡 <strong>You don't need to prepare anything.</strong> Just answer honestly, like you're explaining your firm to a new paralegal. The more detail you give, the more every tool will reflect your actual practice — and the tighter your security configuration will be.
+        </div>
+
+        <!-- INTERVIEW PREVIEW -->
+        <div class="demo-wrap" style="margin-top:1.2rem">
+          <div class="demo-top">
+            <div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div>
+            &nbsp; What the interview looks like inside Claude Code
+          </div>
+          <div class="demo-body">
+            <div class="chat">
+              <span class="chat-who cl">Claude</span>
+              <div class="chat-msg">Let's set up Claude Code for your firm. First question: <strong>What is your firm's name, and what state or states do you primarily practice in?</strong></div>
+            </div>
+            <div class="chat">
+              <span class="chat-who at">You</span>
+              <div class="chat-msg atty">Martinez &amp; Associates. We're in Texas, mainly Harris County.</div>
+            </div>
+            <div class="chat">
+              <span class="chat-who cl">Claude</span>
+              <div class="chat-msg">Got it — Harris County District Court and the 14th/1st Courts of Appeals. For context, Texas uses a <strong>2-year SOL for personal injury</strong> under Tex. Civ. Prac. &amp; Rem. Code § 16.003, and a <strong>modified comparative fault rule</strong> — plaintiff can't recover if more than 50% at fault. I'll build that in. <strong>What practice areas does your firm handle?</strong></div>
+            </div>
+            <div class="chat">
+              <span class="chat-who at">You</span>
+              <div class="chat-msg atty">Personal injury is about 80% of our work — mostly auto accidents and 18-wheeler cases. We do some family law too.</div>
+            </div>
+            <div class="chat">
+              <span class="chat-who cl">Claude</span>
+              <div class="chat-msg">For the trucking cases I'll include FMCSA commercial vehicle regulations and the Texas Transportation Code in your config. <strong>What's your minimum case value for accepting a PI matter?</strong></div>
+            </div>
+            <div class="chat">
+              <span class="chat-who at">You</span>
+              <div class="chat-msg atty">We generally don't take cases under $25,000 in likely damages.</div>
+            </div>
+            <div class="chat">
+              <span class="chat-who cl">Claude</span>
+              <div class="chat-msg">Noted — I'll set $25k as the acceptance threshold in your CLAUDE.md. <strong>How many attorneys and staff members will use these tools, and what are their roles?</strong> (I'll use this to configure your security and access controls.)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 5 -->
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <p class="step-time">⏱ 5 minutes</p>
+        <h3>Save Your Three Configuration Files</h3>
+        <p>When the interview finishes, Claude Code outputs three complete files. Save them exactly where Claude tells you — typically in your LawFirmTools folder like this:</p>
+        <div class="code-box">~/LawFirmTools/CLAUDE.md
+~/LawFirmTools/config/jurisdiction.config.md
+~/LawFirmTools/config/security.config.md</div>
+        <p style="margin-top:.7rem">That's your firm's brain built. Every tool you create from this point forward automatically knows:</p>
+        <ul style="list-style:none;margin-top:.5rem">
+          <li style="font-size:.86rem;color:var(--gray);padding:4px 0;display:flex;gap:8px"><span style="color:var(--red);font-weight:700">✓</span> Your state's exact statutes of limitations with citations</li>
+          <li style="font-size:.86rem;color:var(--gray);padding:4px 0;display:flex;gap:8px"><span style="color:var(--red);font-weight:700">✓</span> Your courts' local rules and mandatory forms</li>
+          <li style="font-size:.86rem;color:var(--gray);padding:4px 0;display:flex;gap:8px"><span style="color:var(--red);font-weight:700">✓</span> Your team structure and who can access what</li>
+          <li style="font-size:.86rem;color:var(--gray);padding:4px 0;display:flex;gap:8px"><span style="color:var(--red);font-weight:700">✓</span> Your case acceptance criteria and document standards</li>
+          <li style="font-size:.86rem;color:var(--gray);padding:4px 0;display:flex;gap:8px"><span style="color:var(--red);font-weight:700">✓</span> Your security requirements — auto-applied to every tool</li>
+        </ul>
+        <div class="callout">🔒 These files stay on your computer and in your private GitHub repository. They are not shared publicly or accessible to anyone outside your firm.</div>
+      </div>
+    </div>
+
+    <!-- STEP 6 -->
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-body">
+        <p class="step-time">⏱ 10 minutes — your first AI agent</p>
+        <h3>Build Your First Tool</h3>
+        <p>Now you're ready to build. Tell Claude Code what you want — it reads your config files and applies your jurisdiction, security, and standards automatically. Try this as your first build:</p>
+        <div class="code-box" style="color:#e0e0e0;font-size:.78rem;line-height:1.9;white-space:pre-wrap">Read CLAUDE.md, jurisdiction.config.md, and security.config.md.
+
+Build a secure client intake form for our firm.
+Apply our practice area criteria and state SOLs automatically.
+Follow all security requirements from security.config.md.
+Connect to our CRM when I confirm it's working locally.</div>
+        <p style="margin-top:.7rem">Those 5 lines produce a complete, secure, jurisdiction-aware intake tool — specific to your firm, your state, your courts, your team.</p>
+        <div class="callout">💡 <strong>Other tools to build next:</strong> document review pipeline, deadline tracker, demand letter generator, legal research agent, billing narrative writer, conflict checker. Each one reads your config files and applies your standards automatically.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- WHAT INTERVIEW PRODUCES -->
+<div class="section">
+  <div class="section-inner">
+    <p class="section-eyebrow">What Gets Generated</p>
+    <h2>Three Files That Power Everything</h2>
+    <p class="section-sub">The interview produces these files. Every tool built afterward inherits them automatically — no re-configuration needed.</p>
+    <div class="out-grid">
+      <div class="out-card">
+        <div class="fname">CLAUDE.md</div>
+        <h4>Your Firm Brain</h4>
+        <p>Firm identity, practice standards, team roles, integrations, document templates. Claude reads this every session — you never explain your firm twice.</p>
+      </div>
+      <div class="out-card">
+        <div class="fname">jurisdiction.config.md</div>
+        <h4>Your State Law Reference</h4>
+        <p>SOLs with statute citations, local court rules, mandatory forms, jury instructions, damages caps — for every state you practice in.</p>
+      </div>
+      <div class="out-card">
+        <div class="fname">security.config.md</div>
+        <h4>Your Security Layer</h4>
+        <p>Credential rules, encryption standards, role-based access controls, and audit logging — configured to your firm's team structure automatically.</p>
+      </div>
+      <div class="out-card">
+        <div class="fname">skills/ library</div>
+        <h4>14 Ready-to-Run Skills</h4>
+        <p>Intake, document review, research, drafting, deadlines, billing, conflict checks — copy-paste prompts for every common law firm task.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DONE FOR YOU CTA -->
+<div class="section section-bg" id="done-for-you">
+  <div class="section-inner">
+    <div class="team-cta">
+      <div class="team-cta-left">
+        <span class="card-badge badge-done" style="margin-bottom:1rem">⭐ Done-For-You</span>
+        <h3>Want Us To <span class="r">Handle Everything?</span></h3>
+        <p>The Best Legal Accelerator team sets up your entire Claude Code infrastructure — custom tools, and ongoing management as your practice grows and state laws change.</p>
+        <ul>
+          <li>We run the setup interview and configure all three files for your firm</li>
+          <li>We build your first 3 tools: intake, document review, deadline tracker</li>
+                    <li>Monthly updates as state laws &amp; court rules change</li>
+          <li>Ongoing support — we are your dedicated AI infrastructure team</li>
+          <li>Priority access to every new tool we add to the library</li>
+        </ul>
+        <a href="#" onclick="showPage('apply'); return false;" target="_blank" class="btn-red" style="font-size:.9rem">
+          🚀 Apply for Done-For-You Setup →
+        </a>
+        <p style="margin-top:.8rem;font-size:.78rem;color:#aaa;">Limited availability. Multi-state and multi-practice-area firms welcome.</p>
+      </div>
+      <div class="team-cta-right">
+        <div class="icon">🚀</div>
+        <strong>Concierge Setup</strong>
+        <p>Done-for-you configuration, staff training &amp; ongoing management from the Best Legal Accelerator team</p>
+        <br>
+        <a href="https://bestlegalaccelerator.com" target="_blank" style="color:#f0c040;font-weight:700;font-size:.82rem;text-decoration:none">bestlegalaccelerator.com →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FREE TRAINING SECTION -->
+<div class="training-section" id="free-training">
+  <p class="training-eyebrow">🎓 100% No-Cost Webinar For Lawyers</p>
+  <h2>2x-4x Your Current Revenue In 6-12 Months And Free Yourself From Your Law Firm</h2>
+  <p class="training-italic">(Without Losing Time and Money or Working 60-80 Hours Per Week)</p>
+
+  <ul class="training-bullets">
+    <li>How To <strong>Predictably and Consistently Get 5-20 New Dream Clients Every Month</strong></li>
+    <li>The <strong>Exact AI Framework</strong> To Automate Your Entire Law Firm From A-Z With AI &amp; Automated Workflows</li>
+    <li>The <strong>Exact Steps</strong> To Completely Replace Yourself So <strong>Your Law Firm Runs On Its Own</strong></li>
+    <li>How To <strong>Implement This System in 2 Hours or Less</strong> Per Week Without Tech Skills or Doing This By Yourself</li>
+    <li>How This <strong>Universal Blueprint Works For ANY Lawyer and Practice Area</strong> Regardless of Years of Experience, Location, or Track Record</li>
+  </ul>
+
+  <a href="https://bestlegalaccelerator.com" target="_blank" class="btn-red" style="font-size:1.05rem;padding:18px 50px">
+    Get FREE Training Now →
+  </a>
+
+  <p class="training-urgency" style="margin-top:1.2rem">⚠️ Very Limited Availability — This Training Will NOT Be Available For Long!</p>
+</div>
+
+<!-- FOOTER -->
+  <footer style="background:#111;color:#aaa;padding:1.5rem;text-align:center;font-size:.78rem">
+    <p>&#128640; <strong style="color:#fff">Best Legal Accelerator</strong> &nbsp;|&nbsp; <a href="#" onclick="showPage('skills'); return false;" style="color:#e8192c;text-decoration:none;font-weight:600">Skills Library</a> &nbsp;|&nbsp; <a href="#" onclick="showPage('guide'); return false;" style="color:#e8192c;text-decoration:none;font-weight:600">How to Implement</a> &nbsp;|&nbsp; <a href="#" onclick="showPage('reference'); return false;" style="color:#e8192c;text-decoration:none;font-weight:600">Quick Reference</a> &nbsp;|&nbsp; <a href="https://bestlegalaccelerator.com" target="_blank" style="color:#e8192c;text-decoration:none;font-weight:600">bestlegalaccelerator.com</a></p>
+    <p style="margin-top:.4rem">&#169; 2025 BestLegalChoice, Inc. All Rights Reserved.</p>
+  </footer>
+</div>
+
+<div id="page-skills" style="display:none">
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow">📚 Claude Code Skills Library</p>
+  <h1>Every Skill You Need to Build<br>Secure AI Tools for Your Law Firm</h1>
+  <p>
+    <strong>22 skills across 4 layers.</strong> Each skill contains the exact prompt to paste into Claude Code.
+    Click any skill to expand it, read what it does, and copy the prompt directly into your terminal.
+    No coding knowledge required.
+  </p>
+  <a href="#layer-0" class="btn-red">Browse All Skills ↓</a>
+</div>
+
+<!-- HOW TO USE -->
+<div class="how-section">
+  <div class="how-inner">
+    <h2>How to Use These Skills</h2>
+    <div class="how-steps">
+      <div class="how-step">
+        <span class="how-num">1</span>
+        <p><strong>Complete the Setup Interview first</strong> (Step 4 on the main guide). Your CLAUDE.md, jurisdiction config, and security config must exist before using any skill below.</p>
+      </div>
+      <div class="how-step">
+        <span class="how-num">2</span>
+        <p><strong>Open Claude Code</strong> in your terminal → <code style="background:#eee;padding:1px 5px;border-radius:2px;font-size:.82rem">cd ~/LawFirmTools && claude</code> → tell it to read your CLAUDE.md.</p>
+      </div>
+      <div class="how-step">
+        <span class="how-num">3</span>
+        <p><strong>Click any skill card below</strong> to expand it → click <strong>Copy Prompt</strong> → paste directly into Claude Code. That's it.</p>
+      </div>
+      <div class="how-step">
+        <span class="how-num">4</span>
+        <p><strong>Build in order:</strong> Foundation first → Security confirmed → then Legal Tools → then Operations. Don't skip layers.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- LAYER 0 — FOUNDATION -->
+<!-- ════════════════════════════════════════ -->
+<div class="layer" id="layer-0" style="background:var(--white)">
+  <div class="layer-inner">
+    <div class="layer-header">
+      <span class="layer-badge b0">Layer 0 — Foundation</span>
+      <div class="layer-header-text">
+        <h2>Foundation Skills — Everyone Does These First</h2>
+        <p>These four skills set up your workspace, teach you how to prompt, build your firm brain, and connect your deployment pipeline. Run all four before building any tool. Takes about 45 minutes total — you only do it once.</p>
+      </div>
+    </div>
+
+    <div class="skills-grid">
+
+      <!-- SKILL: Environment Setup -->
+      <div class="skill-card" id="sk-env">
+        <div class="skill-header" onclick="toggle('sk-env')">
+          <div class="skill-title-group">
+            <span class="skill-icon">⚙️</span>
+            <div class="skill-name">Environment Setup</div>
+            <div class="skill-when">Run this before anything else. Once per project.</div>
+          </div>
+          <button class="expand-btn">View Skill</button>
+        </div>
+        <div class="skill-desc">
+          Creates your scoped project folder, sets up your .env credential file, configures .gitignore so secrets never leak into code, and gets Claude Code pointed at the right directory. Skipping this is the #1 reason teams end up with insecure builds.
+        </div>
+        <div class="skill-body">
+          <pre>
+# Paste this into Claude Code to run the Environment Setup skill
+
+Read the environment-setup skill and set up my project workspace.
+
+I need:
+- A scoped project folder at ~/LawFirmTools/[project-name]
+- A .env file with chmod 600 (only my user can read it)
+- A .gitignore that blocks .env, *.key, *.pem from ever being committed
+- A .env.example showing all required variable names (no real values)
+- Git initialized with a main branch
+
+Walk me through each step and confirm when done.
+Then tell me exactly what to do next.</pre>
+          <button class="copy-btn" onclick="copySkill(this, 'sk-env')">📋 Copy Prompt</button>
+        </div>
+      </div>
+
+      <!-- SKILL: Firm Brain -->
+      <div class="skill-card" id="sk-brain">
+        <div class="skill-header" onclick="toggle('sk-brain')">
+          <div class="skill-title-group">
+            <span class="skill-icon">🧠</span>
+            <div class="skill-name">Firm Brain (CLAUDE.md)</div>
+            <div class="skill-when">After Setup Interview. Claude reads this every session.</div>
+          </div>
+          <button class="expand-btn">View Skill</button>
+        </div>
+        <div class="skill-desc">
+          Your CLAUDE.md file is Claude Code's memory. It contains your firm name, practice areas, jurisdiction defaults, team structure, integrations, and document standards. Once it exists, you never have to re-explain your firm. Built automatically by the Setup Interview.
+        </div>
+        <div class="skill-body">
+          <pre>
+# If you need to update or add to your CLAUDE.md
+
+Read my existing CLAUDE.md.
+
+I need to [add / update / expand] the following:
+- [Describe what changed — new practice area, new state, new staff role, etc.]
+
+Update CLAUDE.md to reflect these changes without removing
+anything that's already correct. Show me the changes before saving.</pre>
+          <button class="copy-btn" onclick="copySkill(this, 'sk-brain')">📋 Copy Prompt</button>
+        </div>
+      </div>
+
+      <!-- SKILL: Prompting Fundamentals -->
+      <div class="skill-card" id="sk-prompt">
+        <div class="skill-header" onclick="toggle('sk-prompt')">
+          <div class="skill-title-group">
+            <span class="skill-icon">💬</span>
+            <div class="skill-name">Prompting Fundamentals</div>
+            <div class="skill-when">Reference this whenever a prompt isn't producing the right result.</div>
+          </div>
+          <button class="expand-btn">View Skill</button>
+        </div>
+        <div class="skill-desc">
+          The formula for prompting Claude Code to build anything correctly: goal-first language, explicit constraints, security requirements, and output specification. Teams that learn this build 10x faster with fewer broken results.
+        </div>
+        <div class="skill-body">
+          <pre>
+# The Universal Build Prompt Formula
+# Replace everything in [brackets] with your specifics
+
+[PASTE MASTER SECURITY PROMPT FIRST — see Security layer below]
+
+Build: [name of the tool]
+
+Purpose: [one sentence — what problem does this solve, who uses it]
+
+Core features:
+- [feature 1]
+- [feature 2]
+- [feature 3]
+
+Business rules:
+- [rule 1 — e.g. "only managing partners can export billing data"]
+- [rule 2 — e.g. "intake form only accepts PDF and DOCX uploads"]
+
+Integrations:
+- [e.g. "Clio CRM — API key in env CLIO_API_KEY — create new matter on submission"]
+
+Output:
+- Framework: Next.js with TypeScript
+- Key pages: [list them]
+- .env.example with all required variable names
+- README with local setup and deployment steps
+- Tests for the core logic</pre>
+          <button class="copy-btn" onclick="copySkill(this, 'sk-prompt')">📋 Copy Prompt</button>
+        </div>
+      </div>
+
+      <!-- SKILL: GitHub + Vercel Deploy -->
+      <div class="skill-card" id="sk-deploy">
+        <div class="skill-header" onclick="toggle('sk-deploy')">
+          <div class="skill-title-group">
+            <span class="skill-icon">🚀</span>
+            <div class="skill-name">GitHub + Vercel Deploy</div>
+            <div class="skill-when">After building your first tool. One-time setup per project.</div>
+          </div>
+          <button class="expand-btn">View Skill</button>
+        </div>
+        <div class="skill-desc">
+          Sets up version control (GitHub) and automated hosting (Vercel). Every change is tracked and tested in a staging preview before going live. Rollback to any prior version in one click. Your tools go from your computer to live on the internet in under 60 seconds.
+        </div>
+        <div class="skill-body">
+          <pre>
+# Paste this after building your first tool to set up deployment
+
+Set up GitHub version control and Vercel deployment for this project.
+
+My GitHub username: [your username]
+My Vercel account is connected to GitHub: yes
+
+I need:
+- Git repository initialized and pushed to a PRIVATE GitHub repo
+  named [your-project-name]
+- A staging branch for testing before anything goes live
+- Branch protection on main: require review before any merge
+- A .env.example committed (not .env — never .env)
+- Vercel connected to the GitHub repo with auto-deploy on push to main
+
+Walk me through each step with the exact commands to run.
+After setup, show me the daily workflow:
+how do I push a change, test it, and go live?</pre>
+          <button class="copy-btn" onclick="copySkill(this, 'sk-deploy')">📋 Copy Prompt</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- LAYER 1 — SECURITY -->
+<!-- ════════════════════════════════════════ -->
+<div class="layer" id="layer-1" style="background:var(--light)">
+  <div class="layer-inner">
+
+    <div class="security-note">
+      <h3>🔒 About the Security Layer</h3>
+      <p>
+        <strong>The Setup Interview (Step 4 on the main guide) automatically generates your security.config.md.</strong>
+        That file configures the security layer for your specific firm — your team structure, your data types, your integrations.
+        The skills below give you the detailed prompts for each individual security component, so you understand exactly what was built
+        and can verify or adjust any part of it. <strong>You do not need to run all of these manually</strong> —
+        the interview handles the setup. Use these skills to inspect, test, or extend specific security components.
+      </p>
+    </div>
+
+    <!-- MASTER SECURITY PROMPT -->
+    <div class="master-prompt">
+      <h3>⚡ Master Security Prompt — Paste Before EVERY Build</h3>
+      <pre>Before writing any code, read security.config.md and confirm you will enforce
+all requirements throughout this entire build.
+
+Key requirements:
+(1) All credentials loaded from environment variables only — never hardcoded
+(2) Authentication required on all routes — use firm Google/Microsoft login
+(3) Role-based access enforced at the DATABASE level, not just the UI
+(4) All client data encrypted at rest (AES-256) and in transit (TLS 1.3)
+(5) All user inputs validated and sanitized server-side
+(6) Audit log every action that touches client data: who, when, what, which matter
+(7) Minimum necessary permissions on all third-party integrations
+(8) Write security tests that prove each of the above works
+
+Now build: [DESCRIBE YOUR TOOL HERE]</pre>
+      <button class="copy-btn" onclick="copyText(this, document.querySelector('.master-prompt pre').textContent)">📋 Copy Master Security Prompt</button>
+    </div>
+
+    <div class="layer-header">
+      <span class="layer-badge b1">Layer 1 — Security</span>
+      <div class="layer-header-text">
+        <h2>Security Skills — Verify and Extend Your Security Layer</h2>
+        <p>Your security.config.md was generated automatically by the Setup Interview. These skills let you understand, verify, and extend each security component. Click any card to see the prompt and what it does.</p>
+      </div>
+    </div>
+
+    <div class="skills-grid">
+
+      <!-- SKILL: Credentials -->
+      <div class="skill-card" id="sk-creds">
+        <div class="skill-header" onclick="toggle('sk-creds')">
+          <div class="skill-title-group">
+            <span class="skill-icon">🔑</span>
+            <div class="skill-name">Credential Management</div>
+            <div class="skill-when">Before connecting to any external service. Verify this is working correctly.</div>
+          </div>
+          <button class="expand-btn">View Skill</button>
+        </div>
+        <div class="skill-desc">
+          Prevents API keys and passwords from being embedded in code. One leaked key can compromise every client, every system, and every integration your firm has. This skill establishes .env files, startup validation, and key rotation schedules.
+        </div>
+        <div class="skill-body">
+          <pre>
+Read CLAUDE.md and security.config.md.
+
+Audit this project for credential security:
+1. Scan all source files — confirm no API keys, passwords, or tokens
+   appear anywhere in the code or comments
+2. Verify .env is in .gitignore and was never committed
+3. Confirm all credentials load from process.env with startup validation
+   (app should fail loudly if a required variable is missing)
+4. Check .env.example exists with all required variable names but no values
+5. Generate a key rotation schedule for all credentials in this project:
+   what to rotate, how often, and the steps to do it safely
+
+Report: pass/fail for each item. Fix any failures before continuing.</pre>
+          <button class="copy-btn" onclick="copySkill(this, 'sk-creds')">📋 Copy Prompt</button>
+        </div>
+      </div>
+
+      <!-- SKILL: Auth + RBAC -->
+      <div class="skill-card" id="sk-auth">
+        <div class="skill-header" onclick="toggle('sk-auth')">
+          <div class="skill-title-group">
+            <span class="skill-icon">🛡️</span>
+            <div class="skill-name">Authentication + Access Control</div>
+            <div class="skill-when">Before any tool is used by more than one person.</div>
+          </div>
+          <button class="expand-btn">View Skill</button>
+        </div>
+        <div class="skill-desc">
+          Ensures only the right people access the right data. Connects to your firm's existing Google or Microsoft login so staff use accounts you already control. Role-based access enforced at the database level — not just the interface. When someone leaves the firm, disable their account once and they're locked out of everything.
+        </div>
+        <div class="skill-body">
+          <pre>
+Read CLAUDE.md and security.config.md.
+
+Implement authentication and role-based access control for this tool.
+
+My firm uses: [Google Workspace / Microsoft 365] — specify one
+Firm email domain: [@yourfirm.com]
+
+Roles and permissions from security.config.md:
+[Claude will read this from your config — no need to retype]
+
+Requirements:
+- SSO with firm identity provider, restricted to firm email domain only
+- Sessions expire after 30 minutes of inactivity
+- RBAC enforced at database query level (not UI level only)
+- Users receive 404 (not 403) when requesting records they don't own
+  — don't reveal that the record exists
+- Log every login and logout with timestamp, IP, and user ID
+
+Write tests that prove:
+1. Unauthenticated requests to any protected route return 401
+2. User A cannot access User B's records by changing a record ID
+3. A lower-privilege role cannot perform a higher-privilege action
+4. A user from outside the firm domain cannot log in</pre>
+          <button class="copy-btn" onclick="copySkill(this, 'sk-auth')">📋 Copy Prompt</button>
+        </div>
+      </div>
+
+      <!-- SKILL: Encryption -->
+      <div class="skill-card" id="sk-enc">
+        <div class="skill-header" onclick="toggle('sk-enc')">
+          <div class="skill-title-group">
+            <span class="skill-icon">🔒</span>
+            <div class="skill-name">Encryption Layer</div>
+            <div class="skill-when">Before storing any client data in a database or file.</div>
+          </div>
+          <button class="expand-btn">View Skill</button>
+        </div>
+        <div class="skill-desc">
+          Protects client data if a server is compromised or a laptop is stolen. Encrypts sensitive fields at rest using AES-256 and enforces TLS 1.3 for all data in transit. Per-matter key derivation means each client's data is encrypted with a unique key.
+        </div>
+        <div class="skill-body">
+          <pre>
+Read CLAUDE.md and security.config.md.
+
+Implement the encryption layer for this tool.
+
+Encrypt at rest:
+- All fields listed as sensitive in security.config.md
+- Use AES-256-GCM
+- Encryption key from process.env.DATABASE_ENCRYPTION_KEY
+- Derive a per-record key from master key + record ID
+  so each record uses a distinct encryption key
+- Store only ciphertext in database — never plaintext sensitive fields
+
+Encrypt in transit:
+- Enforce HTTPS on all endpoints — redirect HTTP to HTTPS
+- Set minimum TLS 1.2, prefer 1.3
+- Add security headers to all responses:
+  Strict-Transport-Security, X-Content-Type-Options, X-Frame-Options
+
+Generate the DATABASE_ENCRYPTION_KEY using:
+openssl rand -base64 32
+And tell me where to store it.
+
+Verify: query the database directly and confirm sensitive fields
+show ciphertext, not plaintext.</pre>
+          <button class="copy-btn" onclick="copySkill(this, 'sk-enc')">📋 Copy Prompt</button>
+        </div>
+      </div>
+
+      <!-- SKILL: Audit Logging -->
+      <div class="skill-card" id="sk-audit">
+        <div class="skill-header" onclick="toggle('sk-audit')">
+          <div class="skill-title-group">
+            <span class="skill-icon">📋</span>
+            <div class="skill-name">Audit Logging</div>
+            <div class="skill-when">For any tool that reads, writes, or exports client data.</div>
+          </div>
+          <button class="expand-btn">View Skill</button>
+        </div>
+        <div class="skill-desc">
+          Your professional responsibility paper trail. Records who accessed what client data, when, and what they did — in an append-only log that cannot be altered. Required for state bar compliance (typically 5-7 year retention). Also your first line of defense if you ever face a breach allegation.
+        </div>
+        <div class="skill-body">
+          <pre>
+Read CLAUDE.md and security.config.md.
+
+Implement audit logging for this tool.
+
+Every log record must capture:
+- timestamp (with timezone)
+- user_id and user_role at time of action
+- user IP address
+- session_id (groups related actions)
+- action type (login / record_viewed / record_edited /
+  document_downloaded / data_exported / admin_action)
+- resource_type and resource_id (what was touched)
+- matter_id if applicable
+- outcome: success or failure
+- failure_reason if failed
+
+Storage requirements:
+- Append-only: REVOKE UPDATE, DELETE on audit table from app user
+- Retain for 7 years minimum
+- Separate table/collection from application data
+
+Alerts — email [alert email from security.config.md] when:
+- 5+ failed logins from same IP in 10 minutes
+- Any export affecting more than 20 records
+- Any admin action (user creation, role change)
+- Any access outside 7am-9pm local time to a matter flagged sensitive
+
+Build an admin-only report endpoint that returns audit logs
+as a downloadable CSV filtered by user, date range, or matter ID.</pre>
+          <button class="copy-btn" onclick="copySkill(this, 'sk-audit')">📋 Copy Prompt</button>
+        </div>
+      </div>
+
+      <!-- SKILL: Input Validation -->
+      <div class="skill-card" id="sk-input">
+        <div class="skill-header" onclick="toggle('sk-input')">
+          <div class="skill-title-group">
+            <span class="skill-icon">🛂</span>
+            <div class="skill-name">Input Validation</div>
+            <div class="skill-when">Before any form or file upload goes live — especially client-facing ones.</div>
+          </div>
+          <button class="expand-btn">View Skill</button>
+        </div>
+        <div class="skill-desc">
+          Every field a person can type into is a potential attack vector. Without validation, a single malicious submission can corrupt your database or expose other clients' data. This skill whitelists what's allowed and rejects everything else — including dangerous file uploads.
+        </div>
+        <div class="skill-body">
+          <pre>
+Read CLAUDE.md and security.config.md.
+
+Implement input validation for all forms and API endpoints in this tool.
+
+Requirements:
+- Validate ALL inputs server-side using Zod (TypeScript) or Pydantic (Python)
+- Whitelist approach: define what IS allowed, reject everything else
+- Text fields: trim whitespace, enforce max length, strip HTML tags
+- Email: validate format, normalize to lowercase
+- Phone: validate format, strip non-numeric except + and -
+- Numbers: validate min/max range, reject NaN and Infinity
+- Dates: validate as real calendar dates
+
+File uploads:
+- Accept PDF and DOCX only
+- Validate by actual file content (magic bytes) — not just the extension
+  (a renamed .exe should be rejected even if called document.pdf)
+- Enforce 25MB maximum file size
+- Strip dangerous characters from filenames
+
+Error responses:
+- Return generic user-friendly messages ("Invalid submission")
+- Never expose stack traces, database errors, or internal details
+- Log all validation failures with timestamp and IP address
+
+Write tests:
+- SQL injection attempt in every text field returns 400
+- XSS attempt is sanitized or rejected
+- .exe renamed to .pdf is rejected by content check
+- File over 25MB is rejected</pre>
+          <button class="copy-btn" onclick="copySkill(this, 'sk-input')">📋 Copy Prompt</button>
+        </div>
+      </div>
+
+      <!-- SKILL: API Scope -->
+      <div class="skill-card" id="sk-api">
+        <div class="skill-header" onclick="toggle('sk-api')">
+          <div class="skill-title-group">
+            <span class="skill-icon">🔌</span>
+            <div class="skill-name">API Scope Control</div>
+            <div class="skill-when">Before connecting to Google Drive, your CRM, email, or any external service.</div>
+          </div>
+          <button class="expand-btn">View Skill</button>
+        </div>
+        <div class="skill-desc">
+          Every third-party integration is a potential breach point. This skill ensures every connection uses the minimum necessary permissions — so if a key is ever compromised, the damage is contained. A document reader only gets read access. A notification sender only gets send access.
+        </div>
+        <div class="skill-body">
+          <pre>
+Read CLAUDE.md and security.config.md.
+
+Configure API integrations with minimum necessary permissions.
+
+For each integration in this project:
+1. Request only the OAuth scope or API permission this tool actually needs
+2. Read-only where writes are not required
+3. Scope to specific resources — not entire accounts
+
+Google Drive:
+- Scope: drive.file (access only to files this app creates)
+  OR drive.readonly (if only reading existing files)
+- Restrict to folder ID in env GOOGLE_DRIVE_FOLDER_ID
+- Never request full drive access
+
+CRM (Clio / Lawmatics / MyCase):
+- Intake tool: create_contacts, create_matters only (not billing, not delete)
+- Status report: read_matters only
+- Document sync: read_documents, create_documents (not delete)
+
+Anthropic API:
+- Never send full documents — extract only the specific text needed
+- Strip client names and identifying information from prompts where possible
+- Log all API calls with matter ID and token count
+
+After building:
+Run a permissions audit and output a table showing:
+service | current scope | minimum possible scope | risk if key is stolen
+Flag any integration where current scope exceeds minimum necessary.</pre>
+          <button class="copy-btn" onclick="copySkill(this, 'sk-api')">📋 Copy Prompt</button>
+        </div>
+      </div>
+
+      <!-- SKILL: Security Testing -->
+      <div class="skill-card" id="sk-sectest">
+        <div class="skill-header" onclick="toggle('sk-sectest')">
+          <div class="skill-title-group">
+            <span class="skill-icon">🧪</span>
+            <div class="skill-name">Security Testing</div>
+            <div class="skill-when">Before any tool goes live with real users or real client data.</div>
+          </div>
+          <button class="expand-btn">View Skill</button>
+        </div>
+        <div class="skill-desc">
+          The tests that prove the security layer actually works. Claude Code writes AND runs these tests itself — you just have to ask. Nothing goes live without passing this checklist. Catches the gaps that manual review misses.
+        </div>
+        <div class="skill-body">
+          <pre>
+Read CLAUDE.md and security.config.md.
+
+Before this tool goes live, run a full security review and write
+tests that prove each of the following:
+
+AUTHENTICATION
+1. Any request to a protected endpoint without a valid session returns 401
+2. An expired session token is rejected
+3. A user outside the firm email domain cannot log in
+
+ACCESS CONTROL
+4. User A cannot read User B's records by changing a record ID in the URL
+5. User A cannot read User B's records by changing a record ID in the body
+6. A lower-privileged role cannot perform a higher-privileged action
+
+INPUT VALIDATION
+7. SQL injection attempt in every text field returns 400, not a DB error
+   (test: ' OR 1=1 -- and 1; DROP TABLE users; --)
+8. XSS attempt is sanitized or rejected
+   (test: &lt;script&gt;alert('xss')&lt;/script&gt;)
+9. File renamed from .exe to .pdf is rejected by content check
+
+DATA HANDLING
+10. API error responses never contain stack traces or internal details
+11. Application logs contain no plaintext credentials or client PII
+
+INFRASTRUCTURE
+12. HTTP requests redirect to HTTPS
+13. Security headers present on all responses
+14. .env file contents cannot be accessed through any URL or endpoint
+
+Run all tests. Report pass/fail for each.
+Fix every failure. Then confirm: ready for production.</pre>
+          <button class="copy-btn" onclick="copySkill(this, 'sk-sectest')">📋 Copy Prompt</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- LAYER 2 — LEGAL TOOLS -->
+<!-- ════════════════════════════════════════ -->
+<div class="layer" id="layer-2" style="background:var(--white)">
+  <div class="layer-inner">
+    <div class="layer-header">
+      <span class="layer-badge b2">Layer 2 — Legal Tools</span>
+      <div class="layer-header-text">
+        <h2>Legal Tool Skills — Build After Security Layer Is Confirmed</h2>
+        <p>These are the actual practice tools. Each one reads your CLAUDE.md and jurisdiction.config.md automatically — so the SOLs, court rules, and practice-area standards are applied without any extra prompting. Paste the Master Security Prompt before each one.</p>
+      </div>
+    </div>
+
+    <div class="skills-grid">
+
+      <!-- Client Intake -->
+      <div class="skill-card" id="sk-intake">
+        <div class="skill-header" onclick="toggle('sk-intake')">
+          <div class="skill-title-group">
+            <span class="skill-icon">📝</span>
+            <div class="skill-name">Client Intake Agent</div>
+            <div class="skill-when">Recommended first tool to build.</div>
+          </div>
+          <button class="expand-btn">View Skill</button>
+        </div>
+        <div class="skill-desc">
+          Replaces the phone-tag and manual data entry that leaks qualified leads when staff is busy. Collects client info, scores the lead automatically, pushes to your CRM, and drafts the follow-up email — all without staff involvement.
+        </div>
+        <div class="skill-body">
+          <pre>
+[PASTE MASTER SECURITY PROMPT FIRST]
+
+Read CLAUDE.md and config/jurisdiction.config.md.
+
+Build a secure client intake system for our firm.
+Apply our practice area criteria and state SOLs automatically.
+
+Intake form collects:
+- Full name, email, phone
+- Date and location of incident
+- Description of what happened (free text, max 5000 characters)
+- Was anyone else involved? Any witnesses?
+- Have you received medical treatment? (yes/no — if yes, providers)
+- Were police or emergency services called? (yes/no)
+- Insurance information (client's and any other party's)
+- Optional: photo or document upload (PDF/DOCX only, 25MB max)
+
+Lead scoring (0-100 points):
+- Clear liability indication: +30 points
+- Medical treatment received: +25 points
+- Police report exists: +15 points
+- Insurance coverage present: +10 points
+- Detailed injury description: +10-20 points
+Score ≥ 50 = qualified lead, flag for immediate attorney review
+
+On submission:
+- Push to [CRM name from CLAUDE.md] via API
+- Send confirmation email to client
+- Send internal alert to intake manager for qualified leads (score ≥ 50)
+- Draft initial consultation email for attorney review (do not auto-send)
+
+Output: Next.js app, /intake (public form), /admin/submissions (staff only,
+requires auth), .env.example, README, tests for lead scoring logic.</pre>
+          <button class="copy-btn" onclick="copySkill(this, 'sk-intake')">📋 Copy Prompt</button>
+        </div>
+      </div>
+
+      <!-- Document Review -->
+      <div class="skill-card" id="sk-docrev">
+        <div class="skill-header" onclick="toggle('sk-docrev')">
+          <div class="skill-title-group">
+            <span class="skill-icon">🔍</span>
+            <div class="skill-name">Document Review Pipeline</div>
+            <div class="skill-when">For contract review, discovery, or any high-volume document work.</div>
+          </div>
+          <button class="expand-btn">View Skill</button>
+        </div>
+        <div class="skill-desc">
+          Point it at a folder of documents. It reads every one, flags non-standard clauses, ranks by risk level, and outputs a summary per document. Cuts contract review time dramatically — attorney reviews the flags, not every word.
+        </div>
+        <div class="skill-body">
+          <pre>
+[PASTE MASTER SECURITY PROMPT FIRST]
+
+Read CLAUDE.md and config/jurisdiction.config.md.
+
+Build a document review pipeline for our firm.
+
+Input: a folder of PDF and DOCX files (specify path at runtime)
+
+For each document, flag:
+- Non-standard or missing clauses for our practice area
+- One-sided or unusual liability provisions
+- Termination rights that favor the other party
+- IP assignment or confidentiality issues
+- Deadline or notice period provisions
+- Any jurisdiction-specific issues per jurisdiction.config.md
+
+Output per document:
+- Risk level: High / Medium / Low
+- Summary of flagged issues (plain English, one paragraph)
+- Specific clause excerpts that triggered each flag
+- Recommended action for attorney review
+
+Final output:
+- A summary report ranking all documents by risk level
+- Individual report per document
+- All reports saved to /output/[date]-review/
+- Log each document reviewed with timestamp and matter ID
+
+Security: process all documents locally — do not send full document
+text to any external service. Send only specific excerpt to Anthropic API.
+Audit log every document accessed with user ID and matter ID.</pre>
+          <button class="copy-btn" onclick="copySkill(this, 'sk-docrev')">📋 Copy Prompt</button>
+        </div>
+      </div>
+
+      <!-- Legal Research -->
+      <div class="skill-card" id="sk-research">
+        <div class="skill-header" onclick="toggle('sk-research')">
+          <div class="skill-title-group">
+            <span class="skill-icon">⚖️</span>
+            <div class="skill-name">Legal Research Agent</div>
+            <div class="skill-when">For case law research, brief support, and jurisdiction analysis.</div>
+          </div>
+          <button class="expand-btn">View Skill</button>
+        </div>
+        <div class="skill-desc">
+          Takes a legal question and your jurisdiction, searches case law via CourtListener (free) or Westlaw/Fastcase APIs, identifies controlling authority and circuit splits, and outputs a formatted research memo with citations. Built for your specific state and court system.
+        </div>
+        <div class="skill-body">
+          <pre>
+[PASTE MASTER SECURITY PROMPT FIRST]
+
+Read CLAUDE.md and config/jurisdiction.config.md.
+
+Build a legal research agent for our firm.
+
+Research API: CourtListener (free, no API key required)
+Endpoint: https://www.courtlistener.com/api/rest/v4/
+
+The tool should:
+1. Accept a legal question and optional jurisdiction filter
+2. Search CourtListener for relevant cases
+3. Filter to our primary courts from jurisdiction.config.md
+4. Identify: controlling authority, persuasive authority, circuit splits
+5. Flag the strongest and weakest precedents for a given position
+6. Output a research memo in our citation format from CLAUDE.md
+
+Memo format:
+- Issue statement
+- Controlling rule (with citations)
+- Key cases for / against (with case name, citation, brief holding)
+- Circuit split note if applicable
+- Recommended approach given our jurisdiction
+
+Output to: /research/[date]-[topic-slug]/memo.docx
+Log every research session with: attorney, query, matter ID, cases retrieved
+
+If the firm has Westlaw or Fastcase API access, include:
+instructions for connecting those APIs using keys from .env</pre>
+          <button class="copy-btn" onclick="copySkill(this, 'sk-research')">📋 Copy Prompt</button>
+        </div>
+      </div>
+
+      <!-- Document Drafting -->
+      <div class="skill-card" id="sk-draft">
+        <div class="skill-header" onclick="toggle('sk-draft')">
+          <div class="skill-title-group">
+            <span class="skill-icon">📄</span>
+            <div class="skill-name">Document Drafting</div>
+            <div class="skill-when">For demand letters, complaints, motions, contracts — any templated document.</div>
+          </div>
+          <button class="expand-btn">View Skill</button>
+        </div>
+        <div class="skill-desc">
+          Populates your firm's existing templates from intake data automatically. Applies your state's rules, your citation format, your letterhead, and your tone — producing a Word document ready for attorney review. Consistent output every time, no template drift.
+        </div>
+        <div class="skill-body">
+          <pre>
+[PASTE MASTER SECURITY PROMPT FIRST]
+
+Read CLAUDE.md and config/jurisdiction.config.md.
+
+Build a document drafting system for our firm.
+
+Document type: [demand letter / complaint / motion / contract — specify]
+Template location: [path to your template from CLAUDE.md]
+Input data: [intake form submission / matter record from CRM — specify]
+
+The system should:
+1. Read the intake data or matter record for the specified matter ID
+2. Populate the template with all relevant facts and figures
+3. Apply jurisdiction-specific language from jurisdiction.config.md:
+   - Correct SOL reference for this matter type
+   - Applicable damages rules and caps
+   - Required legal standards for this document type
+4. Apply firm citation format and document standards from CLAUDE.md
+5. Flag any fields that need attorney input (mark as [ATTORNEY REVIEW])
+6. Output a formatted Word document
+
+Output path: /drafts/[matter-id]/[doc-type]-[date]-draft.docx
+Log every draft generated with: attorney, matter ID, template used, timestamp
+Never overwrite a prior draft — always create a new versioned file</pre>
+          <button class="copy-btn" onclick="copySkill(this, 'sk-draft')">📋 Copy Prompt</button>
+        </div>
+      </div>
+
+      <!-- Document Summarization -->
+      <div class="skill-card" id="sk-summary">
+        <div class="skill-header" onclick="toggle('sk-summary')">
+          <div class="skill-title-group">
+            <span class="skill-icon">📊</span>
+            <div class="skill-name">Document Summarization</div>
+            <div class="skill-when">For medical records, depositions, contracts, or any long document.</div>
+          </div>
+          <button class="expand-btn">View Skill</button>
+        </div>
+        <div class="skill-desc">
+          Turns a 500-page medical record into a structured chronology. Turns a deposition transcript into a summary with contradictions flagged. Turns a contract into a one-page abstract with key terms and obligations. Attorney reviews the summary, not the raw document.
+        </div>
+        <div class="skill-body">
+          <pre>
+[PASTE MASTER SECURITY PROMPT FIRST]
+
+Read CLAUDE.md and config/jurisdiction.config.md.
+
+Build a document summarization tool for our firm.
+
+Document type: [medical records / deposition transcript / contract — specify]
+
+For MEDICAL RECORDS, output:
+- Patient timeline: date, provider, treatment, diagnosis (chronological)
+- Treatment gaps (periods of no treatment — flagged for defense scrutiny)
+- Pre-existing conditions mentioned
+- Current status / MMI notation if present
+- Providers list with specialties
+
+For DEPOSITION TRANSCRIPTS, output:
+- Key admissions by the witness
+- Contradictions with prior statements or other testimony
+- Damages admissions (or denials)
+- Credibility issues flagged
+
+For CONTRACTS, output:
+- Parties, effective date, term
+- Key obligations per party
+- Payment terms
+- Termination rights
+- Unusual or one-sided provisions flagged
+- Missing standard clauses noted
+
+Security: process document locally. Send only the specific
+excerpt being analyzed to the Anthropic API — not the full document.
+Log every summarization with matter ID and document name.</pre>
+          <button class="copy-btn" onclick="copySkill(this, 'sk-summary')">📋 Copy Prompt</button>
+        </div>
+      </div>
+
+      <!-- Case Law Analysis -->
+      <div class="skill-card" id="sk-caselaw">
+        <div class="skill-header" onclick="toggle('sk-caselaw')">
+          <div class="skill-title-group">
+            <span class="skill-icon">🏛️</span>
+            <div class="skill-name">Case Law Analysis</div>
+            <div class="skill-when">For motion practice, brief writing, and litigation strategy.</div>
+          </div>
+          <button class="expand-btn">View Skill</button>
+        </div>
+        <div class="skill-body">
+          <pre>
+[PASTE MASTER SECURITY PROMPT FIRST]
+
+Read CLAUDE.md and config/jurisdiction.config.md.
+
+Build a case law analysis tool for our firm.
+
+Given a set of cases (uploaded as PDFs or pulled from CourtListener):
+1. Identify the legal rule each case establishes
+2. Track how the rule has evolved across cases chronologically
+3. Flag any circuit splits or conflicting authority
+4. Identify the strongest precedent supporting our position
+5. Identify the weakest precedent — what opposing counsel will use
+6. If judge name provided: pull their prior decisions on this issue
+   and flag any patterns in how they rule
+
+Output:
+- Rule synthesis (2-3 paragraphs — ready for brief argument section)
+- Cases FOR our position (ranked by strength, with citations)
+- Cases AGAINST our position (with suggested distinguishing language)
+- Argument section draft — attorney refines before filing
+
+Output to: /research/[matter-id]/case-analysis-[date].docx
+In our citation format from CLAUDE.md</pre>
+          <button class="copy-btn" onclick="copySkill(this, 'sk-caselaw')">📋 Copy Prompt</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- LAYER 3 — OPERATIONS -->
+<!-- ════════════════════════════════════════ -->
+<div class="layer" id="layer-3" style="background:var(--light)">
+  <div class="layer-inner">
+    <div class="layer-header">
+      <span class="layer-badge b3">Layer 3 — Operations</span>
+      <div class="layer-header-text">
+        <h2>Operations Skills — Run the Firm in the Background</h2>
+        <p>These automations handle the non-billable work that eats your day. They run without attorney involvement, surfacing only what needs a decision. This is where the real time savings compound week over week.</p>
+      </div>
+    </div>
+
+    <div class="skills-grid">
+
+      <!-- Deadline Tracking -->
+      <div class="skill-card" id="sk-deadlines">
+        <div class="skill-header" onclick="toggle('sk-deadlines')">
+          <div class="skill-title-group">
+            <span class="skill-icon">📅</span>
+            <div class="skill-name">Deadline Tracking</div>
+            <div class="skill-when">Highest priority operations skill — malpractice risk reduction.</div>
+          </div>
+          <button class="expand-btn">View Skill</button>
+        </div>
+        <div class="skill-desc">
+          Reads court orders and scheduling orders, extracts every deadline, and pushes them to your firm calendar with tiered reminders. Eliminates the malpractice risk of manually transcribing dates from dense court documents.
+        </div>
+        <div class="skill-body">
+          <pre>
+[PASTE MASTER SECURITY PROMPT FIRST]
+
+Read CLAUDE.md and config/jurisdiction.config.md.
+
+Build a deadline tracking agent for our firm.
+
+Input: PDF or DOCX court orders, scheduling orders, discovery requests
+
+Extract from each document:
+- Every date mentioned with its context (what is due that day)
+- Which party is responsible for each deadline
+- Whether it's court-imposed or stipulated
+- Consequence of missing it if stated
+
+Classify each deadline:
+TIER 1 — Critical (court-imposed, missing = sanctions or dismissal):
+  Filing deadlines, hearing dates, trial dates, response deadlines
+TIER 2 — Important (strategic impact):
+  Discovery cutoffs, deposition notices, expert deadlines
+TIER 3 — Administrative:
+  Draft due to partner, client update calls
+
+Calendar integration: Google Calendar
+Scope: create/edit events on firm calendars only (from CLAUDE.md)
+
+Reminder schedule:
+  TIER 1: 30 days, 14 days, 7 days, 3 days, 1 day before
+  TIER 2: 14 days, 7 days, 3 days before
+  TIER 3: 7 days, 1 day before
+
+Require attorney review before any deadline is confirmed:
+/admin/deadlines shows all pending extractions for approval
+Attorney confirms or edits before event is created in calendar
+
+Note on every draft: "AI-extracted deadline — attorney must verify
+against source document before confirming."</pre>
+          <button class="copy-btn" onclick="copySkill(this, 'sk-deadlines')">📋 Copy Prompt</button>
+        </div>
+      </div>
+
+      <!-- Matter Status Digest -->
+      <div class="skill-card" id="sk-digest">
+        <div class="skill-header" onclick="toggle('sk-digest')">
+          <div class="skill-title-group">
+            <span class="skill-icon">📊</span>
+            <div class="skill-name">Matter Status Digest</div>
+            <div class="skill-when">Weekly — replaces manual status report prep for partners.</div>
+          </div>
+          <button class="expand-btn">View Skill</button>
+        </div>
+        <div class="skill-body">
+          <pre>
+[PASTE MASTER SECURITY PROMPT FIRST]
+
+Read CLAUDE.md.
+
+Build a weekly matter status digest for our firm.
+
+Data source: [CRM name from CLAUDE.md] API
+Pull all open matters for the firm.
+
+For each matter, include:
+- Matter name, client, assigned attorney, practice area
+- Days open, last activity date
+- Next deadline (from calendar if integrated)
+- Status: Active / Stalled (no activity 30+ days) / Urgent (deadline ≤ 14 days)
+- Outstanding tasks or flags
+
+Output:
+- Email digest to managing partners every Monday at 8am
+- Sort: Urgent first, then Stalled, then Active
+- Flag any matter with no activity in 45+ days in red
+- Include summary counts: total open, urgent, stalled
+
+Also build an on-demand version:
+/admin/digest — generates the report for any date range on request
+Accessible to managing_partner role only
+Downloadable as PDF and CSV</pre>
+          <button class="copy-btn" onclick="copySkill(this, 'sk-digest')">📋 Copy Prompt</button>
+        </div>
+      </div>
+
+      <!-- Billing Narratives -->
+      <div class="skill-card" id="sk-billing">
+        <div class="skill-header" onclick="toggle('sk-billing')">
+          <div class="skill-title-group">
+            <span class="skill-icon">💰</span>
+            <div class="skill-name">Billing Narrative Writer</div>
+            <div class="skill-when">For hourly firms — before invoices go to clients.</div>
+          </div>
+          <button class="expand-btn">View Skill</button>
+        </div>
+        <div class="skill-body">
+          <pre>
+[PASTE MASTER SECURITY PROMPT FIRST]
+
+Read CLAUDE.md.
+
+Build a billing narrative rewriting tool.
+
+Input: raw time entries from [CRM name] API
+Format: attorney name, date, hours, raw description
+
+For each entry:
+- Expand vague descriptions into detailed, specific narratives
+  (e.g. "reviewed docs" → "Reviewed and analyzed [X] pages of
+  medical records from [Provider] relating to treatment of
+  [injury type]; identified treatment gaps and IME vulnerabilities")
+- Flag entries that may not survive audit:
+  block billing (multiple tasks in one entry without breakdown),
+  vague descriptions, excessive time for routine tasks
+- Do NOT change hours — rewrite descriptions only
+- Maintain attorney voice and firm tone from CLAUDE.md
+
+Output:
+- Revised entries ready to import back to [CRM]
+- Flagged entries highlighted for attorney review
+- Attorney approves all rewrites before they are saved to CRM
+
+Security: billing data is highly sensitive — audit log every
+entry accessed, restrict to billing_manager and attorney roles only</pre>
+          <button class="copy-btn" onclick="copySkill(this, 'sk-billing')">📋 Copy Prompt</button>
+        </div>
+      </div>
+
+      <!-- Client Communications -->
+      <div class="skill-card" id="sk-comms">
+        <div class="skill-header" onclick="toggle('sk-comms')">
+          <div class="skill-title-group">
+            <span class="skill-icon">✉️</span>
+            <div class="skill-name">Client Communication Drafts</div>
+            <div class="skill-when">For client status updates and follow-up outreach.</div>
+          </div>
+          <button class="expand-btn">View Skill</button>
+        </div>
+        <div class="skill-body">
+          <pre>
+[PASTE MASTER SECURITY PROMPT FIRST]
+
+Read CLAUDE.md.
+
+Build a client communication drafting tool.
+
+Trigger: matter activity in [CRM name] OR scheduled interval
+  (e.g. monthly if no update has been sent)
+
+For each triggered matter:
+1. Pull recent activity from CRM: filings, correspondence, deadlines met
+2. Draft a status update email in firm tone from CLAUDE.md:
+   - What happened since last update
+   - What is happening next and when
+   - Any action needed from the client
+   - Next expected contact date
+3. Route draft to assigned attorney for review
+4. Attorney clicks Approve (sends) or Edit (modify then send)
+   — nothing sends automatically without attorney approval
+
+Also build:
+- Follow-up draft for clients who haven't responded in 14 days
+- Intake confirmation email for new clients (immediate, auto-send is OK)
+
+Track: every email sent, to whom, for which matter, by which attorney
+Report: monthly email volume per attorney and per matter type</pre>
+          <button class="copy-btn" onclick="copySkill(this, 'sk-comms')">📋 Copy Prompt</button>
+        </div>
+      </div>
+
+      <!-- Conflict Check -->
+      <div class="skill-card" id="sk-conflict">
+        <div class="skill-header" onclick="toggle('sk-conflict')">
+          <div class="skill-title-group">
+            <span class="skill-icon">🔎</span>
+            <div class="skill-name">Conflict Check Automation</div>
+            <div class="skill-when">Triggered automatically by every new intake submission.</div>
+          </div>
+          <button class="expand-btn">View Skill</button>
+        </div>
+        <div class="skill-body">
+          <pre>
+[PASTE MASTER SECURITY PROMPT FIRST]
+
+Read CLAUDE.md.
+
+Build a conflict check automation that triggers on every new intake submission.
+
+Check new client against existing matters database for:
+- Client name (exact and fuzzy match — catch "Smith" vs "Jon Smith")
+- Opposing parties named in intake
+- Related businesses or individuals mentioned
+- Address matches
+- Any other parties connected to the matter
+
+Output for each potential conflict found:
+- Match type: client / opposing party / related party
+- Existing matter it conflicts with: matter name, matter ID, assigned attorney
+- Conflict type: direct / potential — flag for attorney determination
+- Confidence level: high / medium / low
+
+Routing:
+- No conflicts found: intake proceeds automatically
+- Potential conflict: route to conflicts@[firm] for attorney review
+  before matter is opened
+- Definite conflict: flag red, halt intake, require managing partner approval
+
+Log every conflict check with: intake ID, parties checked, result, reviewer
+Retain conflict check records permanently — bar compliance requirement
+
+Build a search interface at /admin/conflicts for manual lookups
+Accessible to managing_partner and conflicts_counsel roles only</pre>
+          <button class="copy-btn" onclick="copySkill(this, 'sk-conflict')">📋 Copy Prompt</button>
+        </div>
+      </div>
+
+      <!-- Follow-up Automation -->
+      <div class="skill-card" id="sk-followup">
+        <div class="skill-header" onclick="toggle('sk-followup')">
+          <div class="skill-title-group">
+            <span class="skill-icon">🔄</span>
+            <div class="skill-name">Follow-Up Automation</div>
+            <div class="skill-when">For leads that haven't converted and matters that have gone quiet.</div>
+          </div>
+          <button class="expand-btn">View Skill</button>
+        </div>
+        <div class="skill-body">
+          <pre>
+[PASTE MASTER SECURITY PROMPT FIRST]
+
+Read CLAUDE.md.
+
+Build a follow-up automation system for our firm.
+
+LEAD FOLLOW-UP (unconverted intake submissions):
+- 24 hours after intake: draft "checking in" email for attorney approval
+- 72 hours: draft second follow-up if no response
+- 7 days: draft final outreach + flag for attorney decision to close or continue
+- All drafts routed for attorney approval — nothing sends automatically
+
+MATTER FOLLOW-UP (open matters with no client contact):
+- 30 days no outbound contact: draft status update (see Communications skill)
+- 45 days: flag matter as Stalled in status digest
+- 60 days: escalate to managing partner with recommended action
+
+SCHEDULING FOLLOW-UP (after consultations):
+- 24 hours after consultation: draft retainer follow-up for attorney approval
+- 7 days if no retainer signed: draft second outreach
+
+Track all follow-up sequences:
+- Which stage each lead/matter is in
+- What was sent, when, and what response was received
+- Attorney who approved each communication
+
+Report: weekly follow-up pipeline showing leads by stage
+Accessible to intake_staff and attorneys</pre>
+          <button class="copy-btn" onclick="copySkill(this, 'sk-followup')">📋 Copy Prompt</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- DOWNLOAD BAR -->
+<div class="download-bar">
+  <h3>📦 Download the Complete Skills Library</h3>
+  <p>All 22 skill files plus the Setup Interview prompt, jurisdiction config template, and security config template — in one ZIP.</p>
+  <a href="attorney-onboarding-package.zip" class="btn-download">⬇ Download All Skills (ZIP)</a>
+</div>
+
+<!-- DONE FOR YOU CTA -->
+<div class="cta-bar">
+  <p><strong>Want us to do all of this for you?</strong> The Best Legal Accelerator team configures your firm, builds your first tools, trains your staff, and keeps everything updated as laws change.</p>
+  <a href="#" onclick="showPage('apply'); return false;" class="btn-red" style="font-size:.9rem">🚀 Apply for Done-For-You Setup →</a>
+</div>
+
+<!-- FOOTER -->
+  <footer style="background:#111;color:#aaa;padding:1.5rem;text-align:center;font-size:.78rem">
+    <p>&#128640; <strong style="color:#fff">Best Legal Accelerator</strong> &nbsp;|&nbsp; <a href="#" onclick="showPage('home'); return false;" style="color:#e8192c;text-decoration:none;font-weight:600">Setup Guide</a> &nbsp;|&nbsp; <a href="#" onclick="showPage('guide'); return false;" style="color:#e8192c;text-decoration:none;font-weight:600">How to Implement</a> &nbsp;|&nbsp; <a href="#" onclick="showPage('reference'); return false;" style="color:#e8192c;text-decoration:none;font-weight:600">Quick Reference</a> &nbsp;|&nbsp; <a href="https://bestlegalaccelerator.com" target="_blank" style="color:#e8192c;text-decoration:none;font-weight:600">bestlegalaccelerator.com</a></p>
+    <p style="margin-top:.4rem">&#169; 2025 BestLegalChoice, Inc. All Rights Reserved.</p>
+  </footer>
+</div>
+
+<div id="page-guide" style="display:none">
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eye">📋 Full Implementation Guide</p>
+  <h1>How Lawyers Actually Implement This —<br>Start to Finish</h1>
+  <p>Every step from opening your computer to having a live, working AI tool running in your law firm. </p>
+</div>
+
+<!-- TIMELINE NAV -->
+<div class="timeline-nav">
+  <div class="timeline-inner">
+    <div class="tn-step"><a class="tn-dot" href="#phase-1">1</a><span class="tn-label">Accounts</span></div>
+    <div class="tn-line"></div>
+    <div class="tn-step"><a class="tn-dot" href="#phase-2">2</a><span class="tn-label">Install</span></div>
+    <div class="tn-line"></div>
+    <div class="tn-step"><a class="tn-dot" href="#phase-3">3</a><span class="tn-label">Interview</span></div>
+    <div class="tn-line"></div>
+    <div class="tn-step"><a class="tn-dot" href="#phase-4">4</a><span class="tn-label">Build tool</span></div>
+    <div class="tn-line"></div>
+    <div class="tn-step"><a class="tn-dot" href="#phase-5">5</a><span class="tn-label">Test</span></div>
+    <div class="tn-line"></div>
+    <div class="tn-step"><a class="tn-dot" href="#phase-6">6</a><span class="tn-label">Deploy live</span></div>
+    <div class="tn-line"></div>
+    <div class="tn-step"><a class="tn-dot" href="#phase-7">7</a><span class="tn-label">Daily use</span></div>
+    <div class="tn-line"></div>
+    <div class="tn-step"><a class="tn-dot" href="#ghl">GHL</a><span class="tn-label">GHL Options</span></div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ -->
+<!-- PHASE 1 — ACCOUNTS -->
+<!-- ═══════════════════════════════ -->
+<div class="phase" id="phase-1">
+  <div class="phase-inner">
+    <div class="phase-header">
+      <div class="phase-num">1</div>
+      <div class="phase-title">
+        <h2>Create Your Three Accounts</h2>
+        <span class="time-badge">⏱ 10 minutes · One time only</span>
+        <p>You need three free accounts before anything else. Do them in this order — each one takes about 3 minutes.</p>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step-row">
+        <div class="step-num-col">A</div>
+        <div class="step-body">
+          <h3>Anthropic — the company that makes Claude</h3>
+          <p>Go to <strong>console.anthropic.com</strong> → click Sign Up → enter your email and create a password → verify your email.</p>
+          <p>Once logged in: click <strong>API Keys</strong> in the left menu → click <strong>Create Key</strong> → name it "Law Firm" → <strong>copy the key that appears and paste it into a Notes app or document right now.</strong> You will not be able to see it again.</p>
+          <div class="callout callout-red">⚠️ This key is like a password. Don't share it, don't put it in an email, don't post it anywhere. You'll paste it into your terminal in Phase 2.</div>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-col">B</div>
+        <div class="step-body">
+          <h3>GitHub — where your tools are stored and backed up</h3>
+          <p>Go to <strong>github.com</strong> → click Sign Up → use your firm email address → choose a username (e.g. <em>smithlawfirm</em> or your name) → choose the Free plan → verify your email.</p>
+          <p>Think of GitHub as a filing cabinet for your AI tools. Every version of every tool is saved here automatically. If your computer dies, everything is safe.</p>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-col">C</div>
+        <div class="step-body">
+          <h3>Vercel — where your tools go live on the internet</h3>
+          <p>Go to <strong>vercel.com</strong> → click <strong>Continue with GitHub</strong> (use the GitHub account you just created) → authorize the connection → choose the Hobby (Free) plan.</p>
+          <p>Vercel and GitHub are now linked. When you approve a change to your tool, it goes live on the internet automatically in about 60 seconds — no extra steps.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-green" style="margin-top:1rem">✅ <strong>Done with Phase 1?</strong> You should have: an Anthropic API key saved somewhere, a GitHub account, and a Vercel account connected to GitHub.</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ -->
+<!-- PHASE 2 — INSTALL -->
+<!-- ═══════════════════════════════ -->
+<div class="phase" id="phase-2">
+  <div class="phase-inner">
+    <div class="phase-header">
+      <div class="phase-num">2</div>
+      <div class="phase-title">
+        <h2>Install Claude Code on Your Computer</h2>
+        <span class="time-badge">⏱ 10 minutes · One time only</span>
+        <p>This is the only part that happens on your actual computer. You'll open a text window and type a few commands. That's the extent of the "technical" work.</p>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step-row">
+        <div class="step-num-col">1</div>
+        <div class="step-body">
+          <h3>Open your terminal (the text window)</h3>
+          <p><strong>On a Mac:</strong> Press <strong>Command + Space</strong> on your keyboard at the same time → a search bar appears → type <em>Terminal</em> → press Enter. A window opens with a blinking cursor.</p>
+          <p><strong>On Windows:</strong> Press the <strong>Windows key</strong> (bottom-left of keyboard) → type <em>Command Prompt</em> → press Enter. A black window opens.</p>
+          <p>Don't be intimidated by this window. You're just going to paste text into it and press Enter. That's it.</p>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-col">2</div>
+        <div class="step-body">
+          <h3>Install Node.js (if you haven't already)</h3>
+          <p>Claude Code needs Node.js to run. To check if you have it: click inside the terminal window, paste this, and press Enter:</p>
+          <div class="code">node --version</div>
+          <p>If you see a number like <em>v20.0.0</em> — you're good, skip to Step 3.</p>
+          <p>If you see an error — go to <strong>nodejs.org</strong> → click the big green <strong>LTS</strong> button → download and run the installer → click Next through every screen → when done, close it and reopen your terminal.</p>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-col">3</div>
+        <div class="step-body">
+          <h3>Install Claude Code</h3>
+          <p>Click inside the terminal, paste this exactly, and press Enter:</p>
+          <div class="code">npm install -g @anthropic/claude-code</div>
+          <p>Wait about 60 seconds. You'll see text scrolling. When you see the cursor appear again (a $ or > symbol), it's done.</p>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-col">4</div>
+        <div class="step-body">
+          <h3>Connect Claude Code to your Anthropic account</h3>
+          <p>Paste this and press Enter:</p>
+          <div class="code">claude</div>
+          <p>It will ask for your API key. Paste the key you saved in Phase 1. Press Enter. You'll see a welcome message — Claude Code is installed and ready.</p>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-col">5</div>
+        <div class="step-body">
+          <h3>Create your firm's project folder</h3>
+          <p>Paste the right command for your computer and press Enter:</p>
+          <div class="code"># On Mac:
+mkdir ~/LawFirmTools &amp;&amp; cd ~/LawFirmTools &amp;&amp; claude</div>
+          <div class="code"># On Windows:
+mkdir C:\LawFirmTools &amp;&amp; cd C:\LawFirmTools &amp;&amp; claude</div>
+          <p>Claude Code is now open and pointed at your firm's folder. The cursor is waiting for your first instruction. You're ready for Phase 3.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ -->
+<!-- PHASE 3 — INTERVIEW -->
+<!-- ═══════════════════════════════ -->
+<div class="phase" id="phase-3">
+  <div class="phase-inner">
+    <div class="phase-header">
+      <div class="phase-num">3</div>
+      <div class="phase-title">
+        <h2>Run the Firm Setup Interview</h2>
+        <span class="time-badge">⏱ 10–15 minutes · One time only per firm</span>
+        <p>This is where your customization happens. You copy one prompt, paste it into Claude Code, and then just answer questions — like talking to a paralegal on their first day. Claude generates three configuration files specific to your firm when done.</p>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step-row">
+        <div class="step-num-col">1</div>
+        <div class="step-body">
+          <h3>Copy the Setup Interview prompt from the Skills Library</h3>
+          <p>Go to <a href="#" onclick="showPage('skills'); return false;" style="color:var(--red);font-weight:600">Skills Library</a> → Layer 0 → click <strong>Setup Interview</strong> → click <strong>Copy Prompt</strong>.</p>
+          <p>Or copy it from <a href="#" onclick="showPage('skills'); return false;" style="color:var(--red);font-weight:600">the Skills Library (Layer 0 → Setup Interview)</a> directly.</p>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-col">2</div>
+        <div class="step-body">
+          <h3>Paste it into Claude Code and press Enter</h3>
+          <p>Click inside the terminal where Claude Code is waiting → paste the prompt → press Enter.</p>
+          <p>Claude will respond with: <em>"Let's set up Claude Code for your law firm. First question: What is your firm's name and primary practice state?"</em></p>
+          <p>Just answer. Conversationally. Like you're talking to someone. The more detail you give, the better every tool will be.</p>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-col">3</div>
+        <div class="step-body">
+          <h3>Answer Claude's questions — one at a time</h3>
+          <p>Claude will ask about 15 questions covering:</p>
+          <div class="two-col">
+            <div>
+              <p><strong>About your firm:</strong></p>
+              <ul style="list-style:disc;padding-left:1.2rem;font-size:.83rem;color:var(--gray)">
+                <li>Name, state, counties</li>
+                <li>Practice areas</li>
+                <li>Case acceptance criteria</li>
+                <li>Team structure and roles</li>
+              </ul>
+            </div>
+            <div>
+              <p><strong>About your operations:</strong></p>
+              <ul style="list-style:disc;padding-left:1.2rem;font-size:.83rem;color:var(--gray)">
+                <li>CRM and document storage</li>
+                <li>Existing templates</li>
+                <li>Courts you file in</li>
+                <li>Current intake process</li>
+              </ul>
+            </div>
+          </div>
+          <div class="callout callout-yellow" style="margin-top:.8rem">💡 Claude will share your state's actual laws as you answer — SOLs, court rules, damages caps. You don't need to look anything up. Just confirm or correct what it says.</div>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-col">4</div>
+        <div class="step-body">
+          <h3>Save the three generated files</h3>
+          <p>When the interview is done, Claude outputs three complete files. It will tell you exactly where to save each one. Typically:</p>
+          <div class="code">~/LawFirmTools/CLAUDE.md                        ← firm brain
+~/LawFirmTools/config/jurisdiction.config.md    ← state laws + courts
+~/LawFirmTools/config/security.config.md        ← security layer</div>
+          <p>To save each file: Claude will say something like <em>"Here is your CLAUDE.md — save this to ~/LawFirmTools/CLAUDE.md"</em> and show you the content. You can either:</p>
+          <p><strong>Option A (easiest):</strong> Ask Claude Code to save it for you: type <em>"Save that file now"</em> and it will write it to disk automatically.</p>
+          <p><strong>Option B:</strong> Copy the content, open a text editor (TextEdit on Mac, Notepad on Windows), paste it, and save to the correct path.</p>
+          <div class="callout callout-green">✅ Once all three files are saved, your firm's brain is built. Every tool you create from this point automatically applies your state's laws, your security standards, and your firm's rules — without re-explaining anything.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ -->
+<!-- PHASE 4 — BUILD A TOOL -->
+<!-- ═══════════════════════════════ -->
+<div class="phase" id="phase-4">
+  <div class="phase-inner">
+    <div class="phase-header">
+      <div class="phase-num">4</div>
+      <div class="phase-title">
+        <h2>Build Your First Tool</h2>
+        <span class="time-badge">⏱ 10–20 minutes per tool</span>
+        <p>Now you build. Pick a skill from the Skills Library, copy its prompt, paste it into Claude Code. Claude reads your config files and builds the tool specific to your firm.</p>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step-row">
+        <div class="step-num-col">1</div>
+        <div class="step-body">
+          <h3>Start Claude Code in your firm folder</h3>
+          <p>Every build session starts the same way. Open your terminal and paste:</p>
+          <div class="code">cd ~/LawFirmTools &amp;&amp; claude</div>
+          <p>Then immediately tell Claude to read your config:</p>
+          <div class="code">Read CLAUDE.md, config/jurisdiction.config.md, and config/security.config.md before we start.</div>
+          <p>Claude will confirm it has read them. Now it knows everything about your firm.</p>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-col">2</div>
+        <div class="step-body">
+          <h3>Pick a skill and copy its prompt</h3>
+          <p>Go to the <a href="#" onclick="showPage('skills'); return false;" style="color:var(--red);font-weight:600">Skills Library</a> → find the tool you want to build → click <strong>View Skill</strong> → click <strong>Copy Prompt</strong>.</p>
+          <p><strong>Recommended first tool: Client Intake Agent</strong> (Layer 2 in the Skills Library). It's the highest-ROI first build — stops leads from falling through the cracks immediately.</p>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-col">3</div>
+        <div class="step-body">
+          <h3>Paste the Master Security Prompt first — then the skill prompt</h3>
+          <p>This is a two-paste process:</p>
+          <p><strong>Paste 1:</strong> The Master Security Prompt (on the Skills Library page, at the top of Layer 1 → Copy button). This tells Claude to build securely.</p>
+          <p><strong>Paste 2 (on a new line):</strong> The skill prompt you copied in Step 2.</p>
+          <p>Press Enter. Claude Code will begin building. You'll see it writing files, asking clarifying questions, and reporting progress. Just watch and answer any questions it asks.</p>
+          <div class="callout callout-yellow">💡 Building takes 2–5 minutes typically. Claude Code is actually writing the application code, creating files, and setting up the structure — not just generating text.</div>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-col">4</div>
+        <div class="step-body">
+          <h3>Review what was built</h3>
+          <p>When Claude says it's done, ask it to explain what was created:</p>
+          <div class="code">Walk me through what you just built in plain English.
+What files were created? What does each one do?
+What do I need to add to my .env file?</div>
+          <p>Claude will explain everything. If something isn't right, just tell it: <em>"The [X] part should work differently — it needs to [describe what you want]."</em> It will fix it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ -->
+<!-- PHASE 5 — TEST -->
+<!-- ═══════════════════════════════ -->
+<div class="phase" id="phase-5">
+  <div class="phase-inner">
+    <div class="phase-header">
+      <div class="phase-num">5</div>
+      <div class="phase-title">
+        <h2>Test It Before Anyone Else Sees It</h2>
+        <span class="time-badge">⏱ 5–15 minutes per tool</span>
+        <p>You test on your computer first, then in a private staging URL, before anything goes live. Nothing touches real client data during testing.</p>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step-row">
+        <div class="step-num-col">1</div>
+        <div class="step-body">
+          <h3>Test locally on your computer first</h3>
+          <p>Claude Code will tell you how to run the tool locally. Usually it's something like:</p>
+          <div class="code">npm run dev</div>
+          <p>Then open your browser and go to <strong>localhost:3000</strong> — you'll see your tool running. Test it yourself. Try submitting the intake form. Check that it scores leads. Try uploading a file.</p>
+          <p>If something's wrong: go back to Claude Code and describe the problem. It fixes it. Repeat until it works as expected.</p>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-col">2</div>
+        <div class="step-body">
+          <h3>Ask Claude Code to run the security tests</h3>
+          <p>Before sharing with anyone, paste this:</p>
+          <div class="code">Run the security tests from our security.config.md.
+Prove that: unauthenticated access is blocked, one user
+cannot see another user's data, file uploads reject
+wrong file types, and no credentials appear in the code.</div>
+          <p>Claude Code runs the tests and reports pass/fail. Fix any failures before continuing.</p>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-col">3</div>
+        <div class="step-body">
+          <h3>Push to staging for staff review</h3>
+          <p>Once it works locally, push to your staging branch so staff can test it on a real URL:</p>
+          <div class="code">git add .
+git commit -m "Built: client intake form v1"
+git push origin staging</div>
+          <p>Vercel automatically builds a preview URL. Share that URL with one paralegal or staff member and ask them to test it. Their feedback before going live is gold.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ -->
+<!-- PHASE 6 — DEPLOY LIVE -->
+<!-- ═══════════════════════════════ -->
+<div class="phase" id="phase-6">
+  <div class="phase-inner">
+    <div class="phase-header">
+      <div class="phase-num">6</div>
+      <div class="phase-title">
+        <h2>Deploy It Live</h2>
+        <span class="time-badge">⏱ 5 minutes · Once per tool</span>
+        <p>When you're satisfied with staging, pushing to production takes three commands. Your tool goes live at your custom domain in about 60 seconds.</p>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step-row">
+        <div class="step-num-col">1</div>
+        <div class="step-body">
+          <h3>Add your production credentials to Vercel</h3>
+          <p>Go to <strong>vercel.com</strong> → your project → <strong>Settings → Environment Variables</strong>.</p>
+          <p>Add every variable from your .env file here (the actual values — not the placeholders from .env.example). These are encrypted and never visible to anyone after entry.</p>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-col">2</div>
+        <div class="step-body">
+          <h3>Merge to main and go live</h3>
+          <div class="code">git checkout main
+git merge staging
+git push origin main</div>
+          <p>Vercel detects the push to main and automatically deploys. In about 60 seconds, your tool is live.</p>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-col">3</div>
+        <div class="step-body">
+          <h3>Set your custom domain (optional but recommended)</h3>
+          <p>In Vercel → Settings → Domains, add your firm's subdomain:</p>
+          <div class="code">intake.yourfirm.com      ← intake tool
+research.yourfirm.com    ← research tool
+portal.yourfirm.com      ← client portal</div>
+          <p>Vercel handles the SSL certificate (HTTPS) automatically. Your tools are live at your domain, secure, branded to your firm.</p>
+          <div class="callout callout-green">✅ Your tool is live. Share the URL with staff. Real clients can now use it.</div>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-col">4</div>
+        <div class="step-body">
+          <h3>If something breaks — rollback in one click</h3>
+          <p>Go to <strong>vercel.com</strong> → your project → <strong>Deployments</strong> → find the last working deployment → click the three dots → <strong>Redeploy</strong>.</p>
+          <p>You're back to the working version in 60 seconds. No data lost, no files touched.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ -->
+<!-- PHASE 7 — DAILY USE -->
+<!-- ═══════════════════════════════ -->
+<div class="phase" id="phase-7">
+  <div class="phase-inner">
+    <div class="phase-header">
+      <div class="phase-num">7</div>
+      <div class="phase-title">
+        <h2>Daily Use — The Ongoing Workflow</h2>
+        <span class="time-badge">⏱ Ongoing · This is the routine</span>
+        <p>After setup, your daily workflow is simple. This is what every build session looks like from day two onward.</p>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="info-card">
+        <h4>🔁 Every build session (5 commands)</h4>
+        <ul>
+          <li><span class="ck">1</span><span>Open terminal → <code style="background:#eee;padding:1px 5px;border-radius:2px;font-size:.78rem">cd ~/LawFirmTools && claude</code></span></li>
+          <li><span class="ck">2</span><span>Tell Claude to read your config files</span></li>
+          <li><span class="ck">3</span><span>Paste Master Security Prompt + skill prompt</span></li>
+          <li><span class="ck">4</span><span>Review, test locally, push to staging</span></li>
+          <li><span class="ck">5</span><span>Staff reviews → push to main → live</span></li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>📅 Monthly maintenance (15 minutes)</h4>
+        <ul>
+          <li><span class="ck">→</span><span>Ask Claude Code to run a dependency audit: <em>"Check for any security vulnerabilities in our packages"</em></span></li>
+          <li><span class="ck">→</span><span>Review the audit log report from your admin panel</span></li>
+          <li><span class="ck">→</span><span>Rotate API keys if any are approaching 90 days old</span></li>
+          <li><span class="ck">→</span><span>Update jurisdiction.config.md if any laws changed</span></li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>👤 When a staff member leaves</h4>
+        <ul>
+          <li><span class="ck">1</span><span>Disable their Google/Microsoft account → they're locked out of all tools immediately</span></li>
+          <li><span class="ck">2</span><span>Rotate any API keys they had access to</span></li>
+          <li><span class="ck">3</span><span>Remove from GitHub repo access</span></li>
+          <li><span class="ck">4</span><span>Pull their last 30 days from the audit log</span></li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>🗺️ Adding a new state or practice area</h4>
+        <ul>
+          <li><span class="ck">1</span><span>Open Claude Code in your firm folder</span></li>
+          <li><span class="ck">2</span><span>Tell it: <em>"Read my config files. Add [STATE / PRACTICE AREA]. Interview me about the new area only."</em></span></li>
+          <li><span class="ck">3</span><span>Answer questions → save updated config files</span></li>
+          <li><span class="ck">4</span><span>All future tools automatically apply the new jurisdiction</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ -->
+<!-- GHL OPTIONS -->
+<!-- ═══════════════════════════════ -->
+<!-- BOTTOM CTA -->
+<div style="background:var(--light);border-top:1px solid var(--border);padding:2.5rem 1.5rem;text-align:center">
+  <h2 style="font-size:1.2rem;font-weight:800;margin-bottom:.5rem">Want Us To Handle All of This?</h2>
+  <p style="font-size:.9rem;color:var(--gray);margin-bottom:1.2rem;max-width:560px;margin-left:auto;margin-right:auto">We set up Vercel, configure GHL, build your firm's config files, and deploy your first tools. Your attorneys just show up and use it.</p>
+  <a href=\"#\" onclick=\"showPage('apply'); return false;\" class="btn-red">🚀 Apply for Done-For-You Setup →</a>
+</div>
+<div style="background:#f7f7f7;border-top:1px solid #ddd;padding:2.5rem 1.5rem;text-align:center">
+  <p style="font-size:.95rem;color:#555;margin-bottom:1rem;max-width:600px;margin-left:auto;margin-right:auto"><strong>Want us to do all of this for you?</strong> We configure your firm, build your first tools, and keep everything updated as laws change.</p>
+  <a href="#" onclick="showPage('apply'); return false;" style="display:inline-block;background:#e8192c;color:#fff;font-weight:800;font-size:.9rem;padding:13px 32px;border-radius:4px;text-decoration:none;text-transform:uppercase">&#128640; Apply for Done-For-You Setup &#8594;</a>
+</div>
+  <footer style="background:#111;color:#aaa;padding:1.5rem;text-align:center;font-size:.78rem">
+    <p>&#128640; <strong style="color:#fff">Best Legal Accelerator</strong> &nbsp;|&nbsp; <a href="#" onclick="showPage('home'); return false;" style="color:#e8192c;text-decoration:none;font-weight:600">Setup Guide</a> &nbsp;|&nbsp; <a href="#" onclick="showPage('skills'); return false;" style="color:#e8192c;text-decoration:none;font-weight:600">Skills Library</a> &nbsp;|&nbsp; <a href="#" onclick="showPage('reference'); return false;" style="color:#e8192c;text-decoration:none;font-weight:600">Quick Reference</a> &nbsp;|&nbsp; <a href="https://bestlegalaccelerator.com" target="_blank" style="color:#e8192c;text-decoration:none;font-weight:600">bestlegalaccelerator.com</a></p>
+    <p style="margin-top:.4rem">&#169; 2025 BestLegalChoice, Inc. All Rights Reserved.</p>
+  </footer>
+</div>
+
+<div id="page-reference" style="display:none">
+<div class="qr-wrap">
+<div class="top">
+  <div class="logo">🚀 Best Legal <span>Accelerator</span> — Claude Code Quick Reference</div>
+  <div class="tagline">Keep this at your desk | Print-friendly | bestlegalaccelerator.com</div>
+</div>
+
+<div class="grid">
+
+  <!-- ONE TIME SETUP -->
+  <div class="card">
+    <h3>⚙️ One-Time Setup (~45 min total)</h3>
+    <ul>
+      <li><span class="num">1</span><span>Create 3 accounts: <strong>console.anthropic.com</strong>, <strong>github.com</strong>, <strong>vercel.com</strong></span></li>
+      <li><span class="num">2</span><span>Open Terminal (Mac: Cmd+Space → "Terminal") or Command Prompt (Windows)</span></li>
+      <li><span class="num">3</span><span><code>npm install -g @anthropic/claude-code</code></span></li>
+      <li><span class="num">4</span><span><code>mkdir ~/LawFirmTools &amp;&amp; cd ~/LawFirmTools</code></span></li>
+      <li><span class="num">5</span><span><code>claude</code> — paste your Anthropic API key when prompted</span></li>
+      <li><span class="num">6</span><span>Paste the <strong>Setup Interview Prompt</strong> → answer Claude's questions about your firm</span></li>
+      <li><span class="num">7</span><span>Save the 3 generated files where Claude tells you — setup complete</span></li>
+    </ul>
+  </div>
+
+  <!-- EVERY SESSION -->
+  <div class="card">
+    <h3>📅 Every Build Session</h3>
+    <ul>
+      <li><span class="num">1</span><span>Open terminal → <code>cd ~/LawFirmTools</code></span></li>
+      <li><span class="num">2</span><span><code>claude</code></span></li>
+      <li><span class="num">3</span><span>Say: <strong>"Read CLAUDE.md before we start"</strong></span></li>
+      <li><span class="num">4</span><span>Describe the tool you want to build (see tools list below)</span></li>
+      <li><span class="num">5</span><span>Test: <code>git push origin staging</code> → check preview URL</span></li>
+      <li><span class="num">6</span><span>Go live: <code>git push origin main</code> — live in ~60 seconds</span></li>
+    </ul>
+    <p style="margin-top:.6rem;padding-top:.6rem;border-top:1px solid var(--border)"><strong>Something broke?</strong> vercel.com → your project → Deployments → any prior version → Redeploy. Back in 60 seconds.</p>
+  </div>
+
+  <!-- MASTER SECURITY PROMPT -->
+  <div class="prompt-card">
+    <h3>⚡ Master Security Prompt — paste this before EVERY build (non-negotiable)</h3>
+    <div class="prompt-text">Before writing any code, read security.config.md and confirm you will enforce all requirements throughout this build.
+Key requirements: (1) All credentials from environment variables only — never hardcoded. (2) Authentication
+required on all routes. (3) Role-based access enforced at the database level. (4) Client data encrypted at
+rest (AES-256) and in transit (TLS 1.3). (5) All inputs validated server-side. (6) Audit log every action
+that touches client data. (7) Minimum necessary API permissions.
+
+Now build: [DESCRIBE YOUR TOOL HERE]</div>
+  </div>
+
+  <!-- TOOLS TO BUILD -->
+  <div class="card">
+    <h3>🔧 Tools to Build — What to Ask For</h3>
+    <p style="margin-bottom:.5rem">After "Now build:" describe one of these:</p>
+    <ul>
+      <li><span class="ck">→</span><span><strong>Intake form</strong> — "a client intake system that scores leads and pushes to [CRM]"</span></li>
+      <li><span class="ck">→</span><span><strong>Doc review</strong> — "a tool to review contracts in a folder and flag non-standard clauses"</span></li>
+      <li><span class="ck">→</span><span><strong>Deadlines</strong> — "reads court orders, extracts deadlines, pushes to my calendar"</span></li>
+      <li><span class="ck">→</span><span><strong>Drafting</strong> — "a demand letter generator from our intake form data"</span></li>
+      <li><span class="ck">→</span><span><strong>Research</strong> — "searches CourtListener and outputs a memo with citations"</span></li>
+      <li><span class="ck">→</span><span><strong>Billing</strong> — "rewrites raw time entries into detailed audit-ready narratives"</span></li>
+      <li><span class="ck">→</span><span><strong>Conflicts</strong> — "checks new client against existing matters database"</span></li>
+    </ul>
+  </div>
+
+  <!-- TROUBLESHOOTING -->
+  <div class="card">
+    <h3>🛠️ Troubleshooting</h3>
+    <ul>
+      <li><span class="ck">⚠</span><span><strong>npm install error</strong> → install Node.js at nodejs.org first, then try again</span></li>
+      <li><span class="ck">⚠</span><span><strong>API key error</strong> → console.anthropic.com → create a new key → re-enter</span></li>
+      <li><span class="ck">⚠</span><span><strong>Vercel deploy failed</strong> → paste the error to Claude: "Fix this Vercel error"</span></li>
+      <li><span class="ck">⚠</span><span><strong>Tool behaving wrong</strong> → tell Claude exactly what's wrong and what you need instead</span></li>
+      <li><span class="ck">⚠</span><span><strong>Don't understand code</strong> → ask: "Explain this in plain English"</span></li>
+      <li><span class="ck">⚠</span><span><strong>Need help</strong> → <a href="https://bestlegalaccelerator.com">bestlegalaccelerator.com</a> — Done-For-You option</span></li>
+    </ul>
+  </div>
+
+  <!-- THREE COLS -->
+  <div class="grid three span2" style="gap:.8rem">
+    <div class="card">
+      <h3>📁 Your Key Files</h3>
+      <code>~/LawFirmTools/CLAUDE.md</code>
+      <p style="margin-bottom:.5rem">Firm brain — read every session</p>
+      <code>~/LawFirmTools/config/jurisdiction.config.md</code>
+      <p style="margin-bottom:.5rem">State laws + court rules</p>
+      <code>~/LawFirmTools/config/security.config.md</code>
+      <p>Security layer — applied to every build</p>
+    </div>
+    <div class="card">
+      <h3>🗺️ Adding a New State or Practice Area</h3>
+      <p style="margin-bottom:.5rem">Tell Claude Code:</p>
+      <p><em>"Read my CLAUDE.md, jurisdiction config, and security config. I need to add [STATE / PRACTICE AREA]. Interview me about the new area only — don't re-ask what you already know. Update all three files."</em></p>
+    </div>
+    <div class="card" style="border-top-color:var(--red)">
+      <h3>🚀 Done-For-You Option</h3>
+      <p style="margin-bottom:.5rem">We configure everything, build your first tools, train your staff, and keep configs current as laws change.</p>
+      <p><a href="https://bestlegalaccelerator.com">bestlegalaccelerator.com →</a></p>
+    </div>
+  </div>
+
+  <!-- FREE TRAINING BANNER -->
+  <div class="training-box">
+    <div class="tb-text">
+      <h3>🎓 Free Training — 100% No-Cost Webinar For Lawyers</h3>
+      <p><strong>2x-4x Your Current Revenue In 6-12 Months And Free Yourself From Your Law Firm</strong><br>
+      <em style="color:#aaa">(Without Losing Time and Money or Working 60-80 Hours Per Week)</em></p>
+    </div>
+    <a href="https://bestlegalaccelerator.com" target="_blank" class="tb-btn">Get FREE Training Now →</a>
+  </div>
+
+</div>
+
+</body>
+</html>
+</div>
+  <footer style="background:#111;color:#aaa;padding:1.5rem;text-align:center;font-size:.78rem">
+    <p>&#128640; <strong style="color:#fff">Best Legal Accelerator</strong> &nbsp;|&nbsp; <a href="#" onclick="showPage('home'); return false;" style="color:#e8192c;text-decoration:none;font-weight:600">Setup Guide</a> &nbsp;|&nbsp; <a href="#" onclick="showPage('skills'); return false;" style="color:#e8192c;text-decoration:none;font-weight:600">Skills Library</a> &nbsp;|&nbsp; <a href="#" onclick="showPage('guide'); return false;" style="color:#e8192c;text-decoration:none;font-weight:600">How to Implement</a> &nbsp;|&nbsp; <a href="https://bestlegalaccelerator.com" target="_blank" style="color:#e8192c;text-decoration:none;font-weight:600">bestlegalaccelerator.com</a></p>
+    <p style="margin-top:.4rem">&#169; 2025 BestLegalChoice, Inc. All Rights Reserved.</p>
+  </footer>
+</div>
+
+<div id="page-apply" style="display:none">
+<div style="background:#111;color:#fff;text-align:center;padding:3rem 1.5rem 2.5rem;border-bottom:4px solid #e8192c">
+    <p style="font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#f5c518;margin-bottom:.7rem">&#11088; Done-For-You Setup</p>
+    <h1 style="font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:800;line-height:1.15;margin-bottom:.5rem">Let Our Team Build Everything For You</h1>
+    <p style="font-size:.92rem;color:#aaa;max-width:520px;margin:0 auto;line-height:1.65">We configure your firm, build your first tools, and keep everything updated as laws change.</p>
+  </div>
+  <div style="max-width:680px;margin:2.5rem auto;padding:0 1.5rem 4rem">
+    <div style="background:#f7f7f7;border:1px solid #ddd;border-top:3px solid #e8192c;border-radius:6px;padding:1.2rem;margin-bottom:2rem">
+      <p style="font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#e8192c;margin-bottom:.8rem">What&#39;s included</p>
+      <ul style="list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:4px">
+        <li style="font-size:.84rem;color:#555;padding:4px 0;display:flex;gap:8px"><span style="color:#e8192c;font-weight:700">&#10003;</span> Full firm setup &amp; configuration</li>
+        <li style="font-size:.84rem;color:#555;padding:4px 0;display:flex;gap:8px"><span style="color:#e8192c;font-weight:700">&#10003;</span> First 3 tools built for you</li>
+        <li style="font-size:.84rem;color:#555;padding:4px 0;display:flex;gap:8px"><span style="color:#e8192c;font-weight:700">&#10003;</span> Monthly law &amp; court updates</li>
+        <li style="font-size:.84rem;color:#555;padding:4px 0;display:flex;gap:8px"><span style="color:#e8192c;font-weight:700">&#10003;</span> Ongoing support</li>
+        <li style="font-size:.84rem;color:#555;padding:4px 0;display:flex;gap:8px"><span style="color:#e8192c;font-weight:700">&#10003;</span> New tools as we build them</li>
+      </ul>
+    </div>
+    <div style="border-radius:8px;overflow:hidden;min-height:1043px">
+      <iframe src="https://api.leadconnectorhq.com/widget/form/mApZHJsnkYO62Exs4eCs"
+        style="width:100%;height:1043px;border:none;border-radius:8px;display:block"
+        id="inline-mApZHJsnkYO62Exs4eCs"
+        data-layout='{"id":"INLINE"}' data-trigger-type="alwaysShow"
+        data-activation-type="alwaysActivated" data-deactivation-type="neverDeactivate"
+        data-form-name="Claude Code App" data-height="1043"
+        data-layout-iframe-id="inline-mApZHJsnkYO62Exs4eCs"
+        data-form-id="mApZHJsnkYO62Exs4eCs" title="Claude Code App">
+      </iframe>
+    </div>
+    <div style="text-align:center;margin-top:1.5rem">
+      <button onclick="showPage('home')" style="background:#111;color:#fff;font-weight:700;font-size:.85rem;padding:10px 24px;border-radius:4px;border:none;cursor:pointer;text-transform:uppercase">&#8592; Back to Setup Guide</button>
+    </div>
+  </div>
+  <footer style="background:#111;color:#aaa;padding:1.5rem;text-align:center;font-size:.78rem">
+    <p>&#128640; <strong style="color:#fff">Best Legal Accelerator</strong> &nbsp;|&nbsp; <a href="#" onclick="showPage('home'); return false;" style="color:#e8192c;text-decoration:none;font-weight:600">Setup Guide</a> &nbsp;|&nbsp; <a href="#" onclick="showPage('skills'); return false;" style="color:#e8192c;text-decoration:none;font-weight:600">Skills Library</a> &nbsp;|&nbsp; <a href="#" onclick="showPage('guide'); return false;" style="color:#e8192c;text-decoration:none;font-weight:600">How to Implement</a> &nbsp;|&nbsp; <a href="#" onclick="showPage('reference'); return false;" style="color:#e8192c;text-decoration:none;font-weight:600">Quick Reference</a> &nbsp;|&nbsp; <a href="https://bestlegalaccelerator.com" target="_blank" style="color:#e8192c;text-decoration:none;font-weight:600">bestlegalaccelerator.com</a></p>
+    <p style="margin-top:.4rem">&#169; 2025 BestLegalChoice, Inc. All Rights Reserved.</p>
+  </footer>
+</div>
+
+<script src="https://link.msgsndr.com/js/form_embed.js"></script>
+<script>
+function showPage(name) {
+  var pages = ['home','skills','guide','reference','apply'];
+  for (var i=0; i<pages.length; i++) {
+    var el = document.getElementById('page-' + pages[i]);
+    if (el) el.style.display = (pages[i] === name) ? 'block' : 'none';
+  }
+  window.scrollTo(0,0);
+}
+function toggle(id) {
+  var card = document.getElementById(id);
+  if (!card) return;
+  card.classList.toggle('open');
+  var btn = card.querySelector('.expand-btn');
+  if (btn) btn.textContent = card.classList.contains('open') ? 'Hide Skill' : 'View Skill';
+}
+function copySkill(btn, id) {
+  var card = document.getElementById(id);
+  if (!card) return;
+  var pre = card.querySelector('pre');
+  if (pre) copyText(btn, pre.textContent);
+}
+function copyText(btn, text) {
+  navigator.clipboard.writeText(text.trim()).then(function() {
+    var orig = btn.innerHTML;
+    btn.innerHTML = '&#9989; Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() { btn.innerHTML = orig; btn.classList.remove('copied'); }, 2200);
+  }).catch(function() {
+    var ta = document.createElement('textarea');
+    ta.value = text.trim();
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    var orig = btn.innerHTML;
+    btn.innerHTML = '&#9989; Copied!';
+    setTimeout(function() { btn.innerHTML = orig; }, 2200);
+  });
+}
+</script>
+</body>
+</html>
