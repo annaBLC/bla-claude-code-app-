@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code for Law Firms — Best Legal Accelerator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&family=DM+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#e8192c; --red-dark:#c01020; --orange:#f57c00;
+  --black:#111; --white:#fff; --light:#f7f7f7;
+  --gray:#555; --border:#ddd; --green:#1b5e20; --green-bg:#e8f5e9;
+  --blue:#1a4aaa; --blue-bg:#e8f0ff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,'Open Sans',sans-serif;background:var(--white);color:var(--black);line-height:1.6}
+.topbar{background:var(--black);color:var(--white);text-align:center;font-size:13px;padding:8px 1rem;font-weight:600}
+.topbar a{color:#f5c518;text-decoration:none}
+nav{background:var(--white);border-bottom:2px solid var(--border);padding:.8rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 2px 8px rgba(0,0,0,.08);flex-wrap:wrap;gap:.5rem}
+.logo{font-size:1rem;font-weight:800;color:var(--black);cursor:pointer}
+.logo span{color:var(--red)}
+.nav-links{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center}
+.nav-links a{font-size:.82rem;font-weight:600;color:var(--gray);text-decoration:none;padding:5px 2px;border-bottom:2px solid transparent;transition:all .15s;cursor:pointer}
+.nav-links a:hover,.nav-links a.active{color:var(--red);border-bottom-color:var(--red)}
+.nav-links a.nav-cta{background:var(--red);color:var(--white)!important;padding:7px 14px;border-radius:3px;border-bottom:none}
+.nav-links a.nav-cta:hover{background:var(--red-dark)}
+.page{display:none}
+.page.active{display:block}
+.hero{background:var(--black);color:var(--white);text-align:center;padding:3rem 1.5rem 2.5rem;border-bottom:4px solid var(--red)}
+.hero-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#f5c518;margin-bottom:.7rem}
+.hero h1{font-size:clamp(1.5rem,3.5vw,2.4rem);font-weight:800;line-height:1.15;margin-bottom:.5rem}
+.hero p{font-size:.92rem;color:#aaa;max-width:600px;margin:0 auto;line-height:1.65}
+.hero p strong{color:var(--white)}
+.hero-sub{color:#00c853;font-style:italic;font-weight:800;font-size:1.1rem;margin:1rem 0 1.6rem}
+.btn-red{display:inline-block;background:var(--red);color:var(--white);font-weight:800;font-size:.9rem;padding:13px 32px;border-radius:4px;text-decoration:none;text-transform:uppercase;letter-spacing:.04em;transition:background .15s;cursor:pointer;border:none}
+.btn-red:hover{background:var(--red-dark)}
+.btn-dark{display:inline-block;background:var(--black);color:var(--white);font-weight:700;font-size:.85rem;padding:11px 24px;border-radius:4px;text-decoration:none;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;border:none}
+.btn-outline{display:inline-block;background:transparent;color:var(--red);font-weight:700;font-size:.85rem;padding:10px 22px;border-radius:4px;border:2px solid var(--red);text-decoration:none;cursor:pointer}
+.hero-checks{font-size:1.05rem;font-weight:800;color:#111;background:#f5c518;padding:6px 20px;border-radius:4px;display:inline-block;white-space:nowrap}
+.section{padding:3rem 1.5rem}
+.section-inner{max-width:900px;margin:0 auto}
+.section-bg{background:var(--light);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.section-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red);text-align:center;margin-bottom:.6rem}
+.section h2{font-size:clamp(1.4rem,3vw,1.9rem);font-weight:800;text-align:center;margin-bottom:.5rem;line-height:1.2}
+.section-sub{text-align:center;color:var(--gray);font-size:.9rem;max-width:580px;margin:0 auto 2rem;line-height:1.6}
+.card{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:1.4rem}
+.card-badge{display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:3px;margin-bottom:.8rem}
+.badge-red{background:#ffeaea;color:var(--red)}
+.badge-blue{background:var(--blue-bg);color:var(--blue)}
+.badge-green{background:var(--green-bg);color:var(--green)}
+.badge-gray{background:#eee;color:#555}
+footer{background:var(--black);color:#aaa;padding:1.5rem;text-align:center;font-size:.78rem}
+footer a{color:var(--red);text-decoration:none;font-weight:600}
+code{font-family:'DM Mono','Courier New',monospace}
+.code-box{background:#1a1a1a;color:#f0c040;font-family:'DM Mono','Courier New',monospace;font-size:.78rem;padding:11px 15px;border-radius:4px;margin-top:.5rem;line-height:1.75;overflow-x:auto;white-space:pre}
+.callout{padding:10px 14px;font-size:.83rem;border-radius:4px;margin:.7rem 0;line-height:1.6}
+.callout-yellow{background:#fff8e1;border-left:4px solid var(--orange);color:#555}
+.callout-red{background:#ffeaea;border-left:4px solid var(--red);color:#555}
+.callout-green{background:var(--green-bg);border-left:4px solid var(--green);color:#2a4a2a}
+.callout strong{color:var(--black)}
+.step-row{display:flex;gap:1rem;margin-bottom:1rem;align-items:flex-start;background:var(--white);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.step-num-col{background:var(--red);color:var(--white);font-weight:800;font-size:.9rem;width:36px;min-width:36px;display:flex;align-items:flex-start;justify-content:center;padding-top:14px}
+.step-body{padding:1rem 1rem 1rem 0;flex:1}
+.step-body h3{font-size:.95rem;font-weight:700;margin-bottom:.3rem}
+.step-body p{font-size:.85rem;color:var(--gray);line-height:1.6;margin-bottom:.4rem}
+.step-body p strong{color:var(--black)}
+@media(max-width:640px){
+  nav{padding:.6rem 1rem}
+  .section{padding:2rem 1rem}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">100% No-Cost Workshop For Lawyers — <a href="https://bestlegalaccelerator.com" target="_blank">Get Your FREE Strategy Session →</a></div>
+
+<nav>
+  <div class="logo" onclick="showPage('home')">🚀 Best Legal <span>Accelerator</span></div>
+  <div class="nav-links">
+    <a onclick="showPage('home')" id="nav-home" class="active">Home</a>
+    <a onclick="showPage('interview')" id="nav-interview">Interviews</a>
+    <a onclick="showPage('pipeline')" id="nav-pipeline">The Pipeline</a>
+    <a onclick="showPage('skills')" id="nav-skills">Team Skills</a>
+    <a onclick="showPage('guide')" id="nav-guide">How to Implement</a>
+    <a onclick="showPage('apply')" class="nav-cta">Done-For-You →</a>
+  </div>
+</nav>
+
+<!-- ══════════ PAGE: HOME ══════════ -->
+<div id="page-home" class="page active">
+
+<div class="hero">
+  <p class="hero-eyebrow">🤖 Claude Code AI for Law Firms</p>
+  <h1>Build AI Tools That Run Your<br>Law Firm's Lead-to-Client Pipeline</h1>
+  <p class="hero-sub">(Without Coding, Without a Developer, Without Starting From Scratch)</p>
+  <div style="text-align:center">
+    <a onclick="showPage('interview')" class="btn-red" style="margin-bottom:1.2rem">Start the Firm Brain Interview →</a>
+    <br>
+    <p class="hero-checks">✅ Your Practice Area &nbsp;|&nbsp; ✅ Your State &nbsp;|&nbsp; ✅ Your Own Tech Stack</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-inner">
+    <p class="section-eyebrow">How "Automated" Actually Works</p>
+    <h2>Two Interviews, Then Real Integrations — Not Magic</h2>
+    <p class="section-sub">Once a skill exists, it runs because Claude Code wrote an actual connection to your tools. Here's the mechanism.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem">
+      <div class="card" style="border-top:3px solid var(--blue)">
+        <span class="card-badge badge-blue">Discovery — ~20 min</span>
+        <h3 style="font-size:1.05rem;font-weight:800;margin-bottom:.5rem">Two interviews</h3>
+        <p style="font-size:.85rem;color:var(--gray);line-height:1.6">You tell Claude which tools you actually use — Clio, GHL, none of the above — and what you want automated. Nothing gets built yet. This produces config files.</p>
+      </div>
+      <div class="card" style="border-top:3px solid var(--red)">
+        <span class="card-badge badge-red">Build — minutes each</span>
+        <h3 style="font-size:1.05rem;font-weight:800;margin-bottom:.5rem">Real integrations</h3>
+        <p style="font-size:.85rem;color:var(--gray);line-height:1.6">Claude Code writes an actual script that connects to your tools' APIs using credentials you provide — then runs it on-demand or on a schedule.</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:1.5rem">
+      <p style="font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:.8rem">What "automated" means for each stage type</p>
+      <div style="display:flex;flex-direction:column;gap:.8rem">
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span style="color:var(--red);font-weight:800;flex-shrink:0">●</span>
+          <p style="font-size:.84rem;color:var(--gray)"><strong style="color:var(--black)">Runs on your command</strong> — you type a slash command (e.g. <code style="background:#eee;padding:1px 5px;border-radius:2px;font-size:.78rem">/new-matter</code>), Claude Code executes the script immediately, calling your CRM's API directly.</p>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span style="color:var(--orange);font-weight:800;flex-shrink:0">●</span>
+          <p style="font-size:.84rem;color:var(--gray)"><strong style="color:var(--black)">Runs on a schedule</strong> — for things like the daily deadline brief, Claude Code sets up a scheduled job (cron, or a Vercel scheduled function) that runs without you touching anything.</p>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span style="color:var(--gray);font-weight:800;flex-shrink:0">●</span>
+          <p style="font-size:.84rem;color:var(--gray)"><strong style="color:var(--black)">Runs on a trigger</strong> — for things like "new matter created → make folders," your CRM sends a webhook the moment it happens, and a small always-on listener catches it and acts.</p>
+        </div>
+      </div>
+      <div class="callout callout-yellow" style="margin-top:1rem">
+        💡 Every one of these needs your actual API credentials (Clio key, Drive access, etc.) to talk to your real tools. The interviews tell Claude which tools to connect to — you provide the keys when you build each skill, and Claude walks you through getting them if you don't have them yet.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section section-bg">
+  <div class="section-inner">
+    <p class="section-eyebrow">Choose Your Path</p>
+    <h2>How Do You Want To Get Started?</h2>
+    <p class="section-sub">Both paths lead to the same place — AI tools running your firm's actual pipeline.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
+      <div class="card" style="border:2px solid var(--border)">
+        <span class="card-badge badge-blue">Self-Service</span>
+        <h3 style="font-size:1.2rem;font-weight:800;margin-bottom:.5rem">I'll Set It Up Myself</h3>
+        <p style="font-size:.86rem;color:var(--gray);margin-bottom:1rem;line-height:1.6">Run the interviews yourself, build tools at your own pace using the Skills Library.</p>
+        <ul style="list-style:none;margin-bottom:1.3rem">
+          <li style="font-size:.84rem;color:var(--black);padding:5px 0;border-bottom:1px solid var(--border);display:flex;gap:8px"><span style="color:var(--red);font-weight:700">✓</span> ~20 min for both interviews</li>
+          <li style="font-size:.84rem;color:var(--black);padding:5px 0;border-bottom:1px solid var(--border);display:flex;gap:8px"><span style="color:var(--red);font-weight:700">✓</span> Works with your existing tools, or none</li>
+          <li style="font-size:.84rem;color:var(--black);padding:5px 0;display:flex;gap:8px"><span style="color:var(--red);font-weight:700">✓</span> Full skill library included free</li>
+        </ul>
+        <a onclick="showPage('interview')" class="btn-red" style="display:block;text-align:center">Start the Interviews →</a>
+      </div>
+      <div class="card" style="border:2px solid var(--red)">
+        <span class="card-badge badge-red">⭐ Done-For-You</span>
+        <h3 style="font-size:1.2rem;font-weight:800;margin-bottom:.5rem">Our Team Does Everything For Me</h3>
+        <p style="font-size:.86rem;color:var(--gray);margin-bottom:1rem;line-height:1.6">We run the interviews with you, build your pipeline tools, and train your team.</p>
+        <ul style="list-style:none;margin-bottom:1.3rem">
+          <li style="font-size:.84rem;color:var(--black);padding:5px 0;border-bottom:1px solid var(--border);display:flex;gap:8px"><span style="color:var(--red);font-weight:700">✓</span> We handle the entire setup</li>
+          <li style="font-size:.84rem;color:var(--black);padding:5px 0;border-bottom:1px solid var(--border);display:flex;gap:8px"><span style="color:var(--red);font-weight:700">✓</span> Custom tools for your exact workflow</li>
+          <li style="font-size:.84rem;color:var(--black);padding:5px 0;display:flex;gap:8px"><span style="color:var(--red);font-weight:700">✓</span> Ongoing support, your dedicated AI team</li>
+        </ul>
+        <a onclick="showPage('apply')" class="btn-red" style="display:block;text-align:center">🚀 Apply for Done-For-You →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-inner">
+    <p class="section-eyebrow">The Big Picture</p>
+    <h2>One Pipeline, From Lead To Onboarded Client</h2>
+    <p class="section-sub">This is what gets built — not five separate tools, but one continuous pipeline that mirrors how your firm actually works.</p>
+    <div class="card" style="text-align:center;padding:2rem">
+      <p style="font-size:.88rem;color:var(--gray);margin-bottom:1.2rem;line-height:1.7">New lead → scored → response drafted (you review) → call booked → case evaluated → retainer signed → <strong style="color:var(--black)">file opened</strong> → onboarding call</p>
+      <p style="font-size:.84rem;color:var(--gray);margin-bottom:1.5rem">Once the file is open, two more tools take over: <strong style="color:var(--black)">Document Drafting</strong> (petitions, letters, discovery) and <strong style="color:var(--black)">Automations</strong> (deadline briefs, trust alerts, idle-case nudges) — running for as long as the case is active.</p>
+      <a onclick="showPage('pipeline')" class="btn-outline">See the Full Pipeline →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>🚀 <strong style="color:var(--white)">Best Legal Accelerator</strong> &nbsp;|&nbsp;
+  <a onclick="showPage('interview')">Interviews</a> &nbsp;|&nbsp;
+  <a onclick="showPage('pipeline')">Pipeline</a> &nbsp;|&nbsp;
+  <a onclick="showPage('skills')">Team Skills</a> &nbsp;|&nbsp;
+  <a href="https://bestlegalaccelerator.com" target="_blank">bestlegalaccelerator.com</a></p>
+  <p style="margin-top:.4rem">© 2025 BestLegalChoice, Inc. All Rights Reserved.</p>
+</footer>
+
+</div>
+<!-- END PAGE: HOME -->
+
+<!-- ══════════ PAGE: INTERVIEW ══════════ -->
+<div id="page-interview" class="page">
+
+<div class="hero">
+  <p class="hero-eyebrow">🧠 Step 1 of 2 — Talk</p>
+  <h1>Build Your Firm's Brain</h1>
+  <p>Two interviews. You answer in plain English. Claude Code generates five files that every tool you build afterward reads automatically — so you never explain your firm twice.</p>
+</div>
+
+<div class="section">
+  <div class="section-inner">
+
+    <div class="callout callout-yellow">
+      💡 <strong>Before you start:</strong> make sure Claude Code is installed and you're in your firm's project folder. If you haven't done that yet, see <a onclick="showPage('guide')" style="color:var(--red);font-weight:600">How to Implement</a> for the one-time setup — it takes about 30 minutes and you only do it once.
+    </div>
+
+    <!-- INTERVIEW 1: FIRM BRAIN -->
+    <div style="margin:2.5rem 0 1rem">
+      <span class="card-badge badge-blue">Interview 1 of 2 — ~10 minutes</span>
+      <h2 style="font-size:1.3rem;font-weight:800;margin-top:.6rem">Firm Brain Interview</h2>
+      <p style="font-size:.88rem;color:var(--gray);margin-top:.3rem">Covers your firm's identity, practice area, state, team, and standards. Produces <code style="background:#eee;padding:1px 6px;border-radius:3px;font-size:.8rem">CLAUDE.md</code>, <code style="background:#eee;padding:1px 6px;border-radius:3px;font-size:.8rem">jurisdiction.config.md</code>, and <code style="background:#eee;padding:1px 6px;border-radius:3px;font-size:.8rem">security.config.md</code>.</p>
+    </div>
+
+    <div class="card" style="margin-bottom:1.5rem">
+      <p style="font-size:.85rem;color:var(--gray);margin-bottom:.8rem">Copy this and paste it into Claude Code. Claude will ask you questions one at a time — just answer naturally.</p>
+      <div class="code-box" id="firm-brain-prompt-text">You are helping me configure Claude Code for my law firm.
+Interview me to build three files:
+  1. CLAUDE.md — my firm brain (identity, standards, team, integrations)
+  2. config/jurisdiction.config.md — my state's laws, SOLs, court rules
+  3. config/security.config.md — security layer, auto-built for my team size
+
+Ask me questions ONE AT A TIME, conversationally. Cover:
+- Firm name, location, primary state(s) and counties
+- Practice areas (which is primary)
+- Primary courts I file in and any local rules
+- Key statutes of limitations for my practice (fill in what I don't know)
+- Team size and roles (so security can be configured correctly)
+- Document standards: citation format, tone, templates I already have
+
+After I've answered everything, generate all three files in full —
+no placeholders — and tell me exactly where to save each one.
+
+Start now with the first question.</div>
+      <button onclick="copyPrompt('firm-brain-prompt-text', this)" class="btn-dark" style="margin-top:.8rem">📋 Copy This Prompt</button>
+    </div>
+
+    <!-- INTERVIEW 2: PIPELINE -->
+    <div style="margin:2.5rem 0 1rem">
+      <span class="card-badge badge-red">Interview 2 of 2 — ~10 minutes</span>
+      <h2 style="font-size:1.3rem;font-weight:800;margin-top:.6rem">Pipeline Interview</h2>
+      <p style="font-size:.88rem;color:var(--gray);margin-top:.3rem">Maps your actual lead-to-client workflow, stage by stage — what tools you use today, and what you want automated. Produces <code style="background:#eee;padding:1px 6px;border-radius:3px;font-size:.8rem">pipeline.config.md</code> and <code style="background:#eee;padding:1px 6px;border-radius:3px;font-size:.8rem">case-management.config.md</code>.</p>
+    </div>
+
+    <div class="callout callout-red">
+      ⚠️ <strong>Run this after the Firm Brain interview, not before.</strong> Every law firm's pipeline is different — some use GHL, some Clio, some nothing at all, some skip stages entirely. This interview discovers your reality instead of assuming one.
+    </div>
+
+    <div class="card" style="margin-bottom:1.5rem">
+      <p style="font-size:.85rem;color:var(--gray);margin-bottom:.8rem">Copy this and paste it into Claude Code after the Firm Brain interview is done.</p>
+      <div class="code-box" id="pipeline-prompt-text">Read CLAUDE.md, jurisdiction.config.md, and security.config.md first.
+
+Now run the Pipeline Interview with me. Walk through these 8 stages
+ONE AT A TIME — ask 3 questions per stage, wait for my answer before
+moving to the next stage:
+
+1. Lead intake — how leads reach us, what tool captures them, want automation?
+2. Lead scoring — how we decide accept/reject today, what are MY specific
+   accept/reject rules (ask me to state these explicitly, don't assume),
+   want this automated?
+3. Response to prospect — what we send, who sends it today. Note: you will
+   only ever draft this for review, never send it automatically yourself.
+4. Booking the evaluation call — who handles it, what tool, want automation?
+5. Case evaluation call — walk me through it. This stays human-only; you may
+   only prep talking points beforehand if I ask.
+6. Retainer and payment — what tool, what do I want tracked. Note: you will
+   never collect payment or generate binding agreements.
+7. Opening the file — what CRM/case management system I use (or none), where
+   documents live, my matter types and what checklist each one needs.
+8. Onboarding — what happens after the file opens, want a reminder automated?
+
+After all 8 stages, generate pipeline.config.md and case-management.config.md
+in full, including my exact scoring rules and matter-type checklists verbatim.
+End with a summary of which stages I marked for automation, in build order.
+
+Start now with Stage 1.</div>
+      <button onclick="copyPrompt('pipeline-prompt-text', this)" class="btn-dark" style="margin-top:.8rem">📋 Copy This Prompt</button>
+    </div>
+
+    <div class="callout callout-green">
+      ✅ <strong>When both interviews are done</strong> you'll have 5 files saved in your project folder. Save them where Claude tells you — typically <code style="background:#fff;padding:1px 6px;border-radius:3px;font-size:.78rem">CLAUDE.md</code> in the root and the rest in <code style="background:#fff;padding:1px 6px;border-radius:3px;font-size:.78rem">/config/</code>. From here, go to <a onclick="showPage('pipeline')" style="color:var(--green);font-weight:700">The Pipeline</a> to see exactly what gets built next, in the order your own answers determined.
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>🚀 <strong style="color:var(--white)">Best Legal Accelerator</strong> &nbsp;|&nbsp;
+  <a onclick="showPage('home')">Home</a> &nbsp;|&nbsp;
+  <a onclick="showPage('pipeline')">Pipeline</a> &nbsp;|&nbsp;
+  <a onclick="showPage('skills')">Team Skills</a> &nbsp;|&nbsp;
+  <a href="https://bestlegalaccelerator.com" target="_blank">bestlegalaccelerator.com</a></p>
+  <p style="margin-top:.4rem">© 2025 BestLegalChoice, Inc. All Rights Reserved.</p>
+</footer>
+
+</div>
+<!-- END PAGE: INTERVIEW -->
+
+<!-- ══════════ PAGE: PIPELINE ══════════ -->
+<div id="page-pipeline" class="page">
+
+<div class="hero">
+  <p class="hero-eyebrow">⚙️ Step 2 of 2 — Build</p>
+  <h1>The Pipeline Runs Itself</h1>
+  <p>This isn't a set of commands you trigger manually. It's one always-on service. A lead comes in, it runs end to end on its own — pausing only where a human has to act.</p>
+</div>
+
+<div class="section">
+  <div class="section-inner">
+
+    <div class="callout callout-yellow">
+      💡 <strong>This page assumes both interviews are done.</strong> The build below reads your config files — so it knows your state, your tools, and your own scoring rules. It doesn't work without the interviews first.
+    </div>
+
+    <div style="display:flex;gap:1rem;margin:1.5rem 0;flex-wrap:wrap">
+      <div style="flex:1;min-width:140px;text-align:center;padding:.6rem;background:var(--light);border-radius:6px;font-size:.78rem"><span style="color:var(--red);font-weight:800">●</span> Runs automatically</div>
+      <div style="flex:1;min-width:140px;text-align:center;padding:.6rem;background:var(--light);border-radius:6px;font-size:.78rem"><span style="color:var(--orange);font-weight:800">●</span> Pauses for a human</div>
+      <div style="flex:1;min-width:140px;text-align:center;padding:.6rem;background:var(--light);border-radius:6px;font-size:.78rem"><span style="color:var(--gray);font-weight:800">●</span> Off the service entirely</div>
+    </div>
+
+    <!-- THE CHAIN -->
+    <div class="step-row">
+      <div class="step-num-col">1</div>
+      <div class="step-body">
+        <h3>New lead arrives <span style="color:var(--gray);font-weight:400;font-size:.78rem">— triggers the service automatically</span></h3>
+        <p>Your existing form/GHL/phone intake fires a webhook the instant a lead comes in. The service wakes up and starts working — no one clicks anything.</p>
+      </div>
+    </div>
+
+    <div class="step-row" style="border-left:4px solid var(--red)">
+      <div class="step-num-col">2</div>
+      <div class="step-body">
+        <h3>Lead scored <span style="color:var(--red);font-weight:700;font-size:.72rem">● RUNS AUTOMATICALLY</span></h3>
+        <p>The moment the webhook lands, the service applies <strong>your</strong> accept/reject rules from <code style="background:#eee;padding:1px 5px;border-radius:2px;font-size:.78rem">pipeline.config.md</code> and decides accept / reject / borderline — in under a second, with no one watching.</p>
+      </div>
+    </div>
+
+    <div class="step-row" style="border-left:4px solid var(--orange)">
+      <div class="step-num-col">3</div>
+      <div class="step-body">
+        <h3>Response drafted, then it stops <span style="color:var(--orange);font-weight:700;font-size:.72rem">● PAUSES FOR A HUMAN</span></h3>
+        <p>The service drafts the response and sends it to you (email, Slack, wherever you choose) for approval. <strong>It does not continue on its own from here</strong> — this is the one deliberate stop in the chain. You approve or edit, then it resumes.</p>
+      </div>
+    </div>
+
+    <div class="step-row" style="border-left:4px solid var(--red)">
+      <div class="step-num-col">4</div>
+      <div class="step-body">
+        <h3>Call booked <span style="color:var(--red);font-weight:700;font-size:.72rem">● RUNS AUTOMATICALLY</span></h3>
+        <p>The instant you approve the message in Stage 3, the service sends it and books the evaluation call automatically — using whatever booking tool your pipeline config says you use.</p>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num-col">5</div>
+      <div class="step-body">
+        <h3>Case evaluation call <span style="color:var(--gray);font-weight:700;font-size:.72rem">● OFF THE SERVICE</span></h3>
+        <p style="margin-bottom:.6rem">The service goes quiet here. Attorney meets the prospect, evaluates, decides whether to offer a retainer — entirely outside any automation. It optionally prepped talking points for you beforehand if you asked for that in the interview.</p>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.8rem">
+          <div style="flex:1;min-width:180px;background:var(--green-bg);border-radius:6px;padding:.7rem">
+            <p style="font-size:.72rem;font-weight:800;color:var(--green);margin-bottom:.2rem">↳ Retainer offered</p>
+            <p style="font-size:.78rem;color:var(--gray)">continues to Stage 6</p>
+          </div>
+          <div style="flex:1;min-width:180px;background:#ffeaea;border-radius:6px;padding:.7rem">
+            <p style="font-size:.72rem;font-weight:800;color:var(--red);margin-bottom:.2rem">↳ Case rejected here</p>
+            <p style="font-size:.78rem;color:var(--gray)">attorney marks it declined — service drafts a closing note, no file is opened, chain ends</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-row" style="border-left:4px solid var(--orange)">
+      <div class="step-num-col">6</div>
+      <div class="step-body">
+        <h3>Retainer + payment <span style="color:var(--orange);font-weight:700;font-size:.72rem">● PAUSES FOR A HUMAN — TWICE</span></h3>
+        <p style="margin-bottom:.6rem">The instant the attorney marks the case as retained, the service drafts the retainer agreement and payment request — then stops. <strong style="color:var(--black)">Pause 1:</strong> a human reviews and approves the email before it sends to the client. <strong style="color:var(--black)">Pause 2:</strong> once the client pays and signs, a human confirms payment actually cleared before tagging it approved. The service never sends a binding agreement or moves money on its own — both checkpoints require a person to act.</p>
+      </div>
+    </div>
+
+    <div class="step-row" style="border-left:4px solid var(--red)">
+      <div class="step-num-col">7</div>
+      <div class="step-body">
+        <h3>File opened in CRM <span style="color:var(--red);font-weight:700;font-size:.72rem">● RUNS AUTOMATICALLY</span></h3>
+        <p>The instant you tag payment approved in Stage 6, the service wakes back up, creates the matter, the folders, and the matter-type-specific checklist, with zero manual step.</p>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num-col">8</div>
+      <div class="step-body">
+        <h3>Onboarding call <span style="color:var(--gray);font-weight:700;font-size:.72rem">● MOSTLY OFF THE SERVICE</span></h3>
+        <p>The service can create a reminder task the moment the file opens, if you asked for that — the call itself stays entirely human.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-green" style="margin-top:1.5rem">
+      ✅ <strong>That's the whole chain, branches included.</strong> One lead, one continuous service, three human checkpoints — approve the prospect message, approve the retainer before it sends, confirm payment cleared before the file opens. Below is the single build for this.
+    </div>
+
+    <!-- THE ONE BUILD -->
+    <div class="card" style="margin:1.5rem 0;border-top:3px solid var(--red)">
+      <p style="font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:.8rem">The full pipeline — one build</p>
+      <p style="font-size:.85rem;color:var(--gray);margin-bottom:.8rem">Copy this into Claude Code once. It builds the whole automated chain — scoring, drafting, two approval pauses, and file-opening — as one deployed service, with the rejection branch handled too.</p>
+      <div class="code-box" id="skill-pipeline-text">Read CLAUDE.md, jurisdiction.config.md, pipeline.config.md, and
+case-management.config.md.
+
+Build the full lead-to-file-opened pipeline as one always-on service,
+not a set of manual slash commands. It needs to react to events on
+its own, with no one triggering it by hand.
+
+It must do the following, each step firing automatically unless
+marked as a checkpoint:
+
+1. LISTEN for new-lead webhooks from our intake tool (recorded in
+   pipeline.config.md Stage 1). When one arrives, proceed immediately.
+
+2. SCORE the lead using my exact accept/reject rules from
+   pipeline.config.md Stage 2 — do not invent generic criteria.
+   Output: accept / reject / borderline with the specific reason.
+
+3. CHECKPOINT — DRAFT a response in the tone and channel from Stage 3,
+   then STOP and send it to me for approval (email or Slack — ask me
+   which). Do not send anything to the prospect without my explicit
+   approval.
+
+4. ON MY APPROVAL: send the approved message automatically, then book
+   the evaluation call automatically using the tool from Stage 4.
+
+5. WAIT silently through the case evaluation call (Stage 5, fully
+   human). When the attorney logs the outcome, branch:
+   - IF REJECTED: draft a closing/decline note for my review, log the
+     lead as closed, and stop here. Do not open a file.
+   - IF RETAINER OFFERED: continue to step 6.
+
+6. CHECKPOINT (first of two) — the instant the attorney marks the
+   case as retained, draft the retainer agreement and payment request,
+   then STOP and send it to me for approval before anything goes to
+   the client. Never send a binding agreement without my explicit
+   sign-off first.
+
+7. ON MY APPROVAL: send the approved retainer/payment request to the
+   client, then WAIT for the signal that they paid and signed (a
+   webhook from our CRM, e-signature tool, or payment processor, per
+   Stage 6).
+
+8. CHECKPOINT (second of two) — when that signal arrives, do NOT open
+   the file automatically. Notify me that payment appears to have
+   cleared and ask me to confirm before proceeding — payment platforms
+   can show provisional or failed states, so a human confirms it
+   actually cleared.
+
+9. ON MY CONFIRMATION: automatically open the file — create the matter
+   in [CRM from case-management.config.md] with intake data pre-filled,
+   create the folder structure, and attach the checklist specific to
+   the matter type, exactly as I defined per matter type in the interview.
+
+10. If onboarding reminders were requested in Stage 8 of the interview,
+    create that reminder task automatically once the file opens.
+
+Deploy this as a real running service (not something I run manually) —
+walk me through what platform makes sense (a Vercel scheduled function
+with webhook endpoints, or similar) given the tools I already use.
+
+Ask me for every API credential you need before building each
+integration, and explain how to get any I don't have yet.
+
+Security: follow all requirements in security.config.md. This service
+handles real prospect and client data continuously, including payment
+confirmation and signed agreements — credentials, logging, and access
+control all apply here, not just to one-off tools.</div>
+      <button onclick="copyPrompt('skill-pipeline-text', this)" class="btn-dark" style="margin-top:.8rem">📋 Copy This Prompt</button>
+    </div>
+      </div>
+    </div>
+
+    <!-- STAGE 8 -->
+    <div class="step-row">
+      <div class="step-num-col">8</div>
+      <div class="step-body">
+        <h3>Onboarding call <span style="color:var(--gray);font-weight:700;font-size:.72rem">● MOSTLY HUMAN</span></h3>
+        <p>Attorney welcomes the new client. Claude can create a reminder task once the file opens, if your pipeline config asked for that — never the call itself.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-green" style="margin-top:1.5rem">
+      ✅ <strong>Once the file is open</strong>, two more tools take over for as long as the case is active — they're not pipeline stages, they run continuously.
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem">
+      <div class="card" style="border-top:3px solid var(--blue)">
+        <span class="card-badge badge-blue">Fires per document</span>
+        <h3 style="font-size:1.05rem;font-weight:800;margin-bottom:.5rem">Document Drafting</h3>
+        <p style="font-size:.84rem;color:var(--gray);margin-bottom:1rem">Petitions, RFOs, discovery, client letters — Claude drafts, attorney reviews, nothing files alone.</p>
+        <a onclick="showPage('skills')" class="btn-outline" style="font-size:.8rem;padding:8px 18px">See Drafting Skills →</a>
+      </div>
+      <div class="card" style="border-top:3px solid var(--green)">
+        <span class="card-badge badge-green">Runs continuously</span>
+        <h3 style="font-size:1.05rem;font-weight:800;margin-bottom:.5rem">Automations</h3>
+        <p style="font-size:.84rem;color:var(--gray);margin-bottom:1rem">Daily deadline briefs, trust threshold monitoring, idle-case nudges — runs while the file stays open.</p>
+        <a onclick="showPage('skills')" class="btn-outline" style="font-size:.8rem;padding:8px 18px">See Automation Skills →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>🚀 <strong style="color:var(--white)">Best Legal Accelerator</strong> &nbsp;|&nbsp;
+  <a onclick="showPage('home')">Home</a> &nbsp;|&nbsp;
+  <a onclick="showPage('interview')">Interviews</a> &nbsp;|&nbsp;
+  <a onclick="showPage('skills')">Team Skills</a> &nbsp;|&nbsp;
+  <a href="https://bestlegalaccelerator.com" target="_blank">bestlegalaccelerator.com</a></p>
+  <p style="margin-top:.4rem">© 2025 BestLegalChoice, Inc. All Rights Reserved.</p>
+</footer>
+
+</div>
+<!-- END PAGE: PIPELINE -->
+
+<!-- ══════════ PAGE: SKILLS ══════════ -->
+<div id="page-skills" class="page">
+
+<div class="hero">
+  <p class="hero-eyebrow">📚 Once a file is open</p>
+  <h1>Team Skills</h1>
+  <p>Every command from the pipeline, plus drafting and automation tools, packaged as slash commands. Anyone on your team with Claude Code can run them — no server needed.</p>
+</div>
+
+<div class="section">
+  <div class="section-inner">
+
+    <div class="callout callout-yellow">
+      💡 <strong>How this works:</strong> all of these live in <code style="background:#fff;padding:1px 5px;border-radius:2px;font-size:.78rem">.claude/commands/</code> in your firm's shared repo. Anyone who clones the repo gets every command instantly — a paralegal types <code style="background:#fff;padding:1px 5px;border-radius:2px;font-size:.78rem">/draft-petition</code>, an attorney types <code style="background:#fff;padding:1px 5px;border-radius:2px;font-size:.78rem">/case-summary</code>.
+    </div>
+
+    <!-- DOCUMENT DRAFTING -->
+    <div style="margin:2rem 0 1rem">
+      <span class="card-badge badge-blue">Document Drafting</span>
+      <h2 style="font-size:1.25rem;font-weight:800;margin-top:.5rem">Petitions, Letters, Discovery</h2>
+      <p style="font-size:.86rem;color:var(--gray);margin-top:.3rem">Reads jurisdiction.config.md for formatting, citations, and local court rules. Claude drafts, attorney reviews, nothing files without approval.</p>
+    </div>
+
+    <div class="card" style="margin-bottom:1.5rem">
+      <p style="font-size:.85rem;color:var(--gray);margin-bottom:.8rem"><code style="background:#eee;padding:1px 5px;border-radius:2px;font-size:.82rem">/draft-petition</code> — paralegal types this plus case facts, gets a first draft.</p>
+      <button onclick="toggleSkill('skill-draft-petition')" class="btn-outline" style="font-size:.78rem;padding:7px 16px">View Skill Prompt</button>
+      <div id="skill-draft-petition" style="display:none;margin-top:.8rem">
+        <div class="code-box" id="skill-draft-petition-text">Read CLAUDE.md and jurisdiction.config.md.
+
+Build a /draft-petition command. Given case facts as arguments, draft
+the petition form required for this matter type in our jurisdiction
+(read jurisdiction.config.md for the exact form, current revision date,
+and CRC formatting rules — font, spacing, line numbering, local rules).
+
+Output: formatted document ready for attorney review.
+Always flag any field where the facts I gave are incomplete or
+ambiguous — never guess at case facts.
+
+Nothing produced by this command files with any court automatically.
+
+Security: follow all requirements in security.config.md.</div>
+        <button onclick="copyPrompt('skill-draft-petition-text', this)" class="btn-dark" style="margin-top:.6rem;font-size:.78rem">📋 Copy Prompt</button>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:1.5rem">
+      <p style="font-size:.85rem;color:var(--gray);margin-bottom:.8rem"><code style="background:#eee;padding:1px 5px;border-radius:2px;font-size:.82rem">/draft-letter</code> — client letters, opposing counsel letters, stipulations.</p>
+      <button onclick="toggleSkill('skill-draft-letter')" class="btn-outline" style="font-size:.78rem;padding:7px 16px">View Skill Prompt</button>
+      <div id="skill-draft-letter" style="display:none;margin-top:.8rem">
+        <div class="code-box" id="skill-draft-letter-text">Read CLAUDE.md and jurisdiction.config.md.
+
+Build a /draft-letter command. Given a letter type (client update,
+opposing counsel, stipulation) and the relevant facts as arguments,
+draft the letter in our firm's tone and format from CLAUDE.md.
+
+Output: formatted draft ready for attorney review.
+This command never sends anything — output only.
+
+Security: follow all requirements in security.config.md.</div>
+        <button onclick="copyPrompt('skill-draft-letter-text', this)" class="btn-dark" style="margin-top:.6rem;font-size:.78rem">📋 Copy Prompt</button>
+      </div>
+    </div>
+
+    <!-- AUTOMATIONS -->
+    <div style="margin:2.5rem 0 1rem">
+      <span class="card-badge badge-green">Automations</span>
+      <h2 style="font-size:1.25rem;font-weight:800;margin-top:.5rem">Runs While The Case Is Open</h2>
+      <p style="font-size:.86rem;color:var(--gray);margin-top:.3rem">Scheduled or triggered workflows that run on their own once a matter exists.</p>
+    </div>
+
+    <div class="card" style="margin-bottom:1.5rem">
+      <p style="font-size:.85rem;color:var(--gray);margin-bottom:.8rem"><code style="background:#eee;padding:1px 5px;border-radius:2px;font-size:.82rem">/deadline-check</code> — runs on-demand, or daily on a schedule, pulled from your CRM.</p>
+      <button onclick="toggleSkill('skill-deadline')" class="btn-outline" style="font-size:.78rem;padding:7px 16px">View Skill Prompt</button>
+      <div id="skill-deadline" style="display:none;margin-top:.8rem">
+        <div class="code-box" id="skill-deadline-text">Read CLAUDE.md and case-management.config.md.
+
+Build a /deadline-check command and a daily scheduled version. It should:
+1. Pull all tasks and calendar entries due in the next 7 days from
+   [CRM name from case-management.config.md]
+2. Flag anything overdue in red
+3. Summarize into a short daily briefing, grouped by matter
+
+Run on-demand via /deadline-check, and optionally on a daily schedule
+if I want that (ask me).
+
+Security: follow all requirements in security.config.md.</div>
+        <button onclick="copyPrompt('skill-deadline-text', this)" class="btn-dark" style="margin-top:.6rem;font-size:.78rem">📋 Copy Prompt</button>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:1.5rem">
+      <p style="font-size:.85rem;color:var(--gray);margin-bottom:.8rem">Runs on a schedule. Trust account low → billing alert. Case idle 14+ days → client-update prompt.</p>
+      <button onclick="toggleSkill('skill-monitor')" class="btn-outline" style="font-size:.78rem;padding:7px 16px">View Skill Prompt</button>
+      <div id="skill-monitor" style="display:none;margin-top:.8rem">
+        <div class="code-box" id="skill-monitor-text">Read CLAUDE.md and case-management.config.md.
+
+Build two read-only monitors:
+
+1. TRUST THRESHOLD MONITOR — checks trust balances against a minimum
+   threshold I set. This is a READ-ONLY early warning, not the system
+   of record. Never moves money or makes accounting entries. Alert me
+   if a balance drops below threshold so I can review it myself.
+
+2. IDLE-CASE MONITOR — flags any matter with no activity logged in
+   14+ days, and drafts (not sends) a suggested client-update message
+   for my review.
+
+Security: follow all requirements in security.config.md.</div>
+        <button onclick="copyPrompt('skill-monitor-text', this)" class="btn-dark" style="margin-top:.6rem;font-size:.78rem">📋 Copy Prompt</button>
+      </div>
+    </div>
+
+    <!-- UTILITIES -->
+    <div style="margin:2.5rem 0 1rem">
+      <span class="card-badge badge-gray">Utilities</span>
+      <h2 style="font-size:1.25rem;font-weight:800;margin-top:.5rem">Quick Commands For The Team</h2>
+    </div>
+
+    <div class="card" style="margin-bottom:1rem">
+      <p style="font-size:.85rem;color:var(--gray)"><code style="background:#eee;padding:1px 5px;border-radius:2px;font-size:.82rem">/case-summary</code> + client name → full briefing from case notes. Attorney uses this before a call.</p>
+    </div>
+    <div class="card">
+      <p style="font-size:.85rem;color:var(--gray)"><code style="background:#eee;padding:1px 5px;border-radius:2px;font-size:.82rem">/screen-lead</code> + call notes → score and recommended next step. Intake staff uses this.</p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>🚀 <strong style="color:var(--white)">Best Legal Accelerator</strong> &nbsp;|&nbsp;
+  <a onclick="showPage('home')">Home</a> &nbsp;|&nbsp;
+  <a onclick="showPage('interview')">Interviews</a> &nbsp;|&nbsp;
+  <a onclick="showPage('pipeline')">Pipeline</a> &nbsp;|&nbsp;
+  <a href="https://bestlegalaccelerator.com" target="_blank">bestlegalaccelerator.com</a></p>
+  <p style="margin-top:.4rem">© 2025 BestLegalChoice, Inc. All Rights Reserved.</p>
+</footer>
+
+</div>
+<!-- END PAGE: SKILLS -->
+
+<!-- ══════════ PAGE: GUIDE ══════════ -->
+<div id="page-guide" class="page">
+
+<div class="hero">
+  <p class="hero-eyebrow">⚙️ One-time technical setup</p>
+  <h1>How To Implement</h1>
+  <p>30 minutes, once, ever. No coding background needed — just account creation and copy-paste.</p>
+</div>
+
+<div class="section">
+  <div class="section-inner">
+
+    <div class="step-row">
+      <div class="step-num-col">1</div>
+      <div class="step-body">
+        <h3>Create 3 free accounts</h3>
+        <p><strong>Anthropic</strong> (console.anthropic.com) — sign up → API Keys → Create Key → save it somewhere safe.</p>
+        <p><strong>GitHub</strong> (github.com) — sign up with your firm email. Stores your tools safely.</p>
+        <p><strong>Vercel</strong> (vercel.com) — sign up with GitHub. Makes your tools live on the internet.</p>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num-col">2</div>
+      <div class="step-body">
+        <h3>Install Claude Code</h3>
+        <p>Open Terminal (Mac: Cmd+Space → "Terminal") or Command Prompt (Windows). Paste and press Enter:</p>
+        <div class="code-box">npm install -g @anthropic/claude-code</div>
+        <p style="margin-top:.6rem">Then type <code style="background:#eee;padding:1px 5px;border-radius:2px;font-size:.8rem">claude</code> and paste your Anthropic API key when prompted.</p>
+        <div class="callout callout-yellow">⚠️ If npm fails, install Node.js first at nodejs.org, then retry.</div>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num-col">3</div>
+      <div class="step-body">
+        <h3>Create your firm folder</h3>
+        <div class="code-box"># Mac
+mkdir ~/LawFirmTools && cd ~/LawFirmTools && claude</div>
+        <div class="code-box" style="margin-top:.4rem"># Windows
+mkdir C:\LawFirmTools && cd C:\LawFirmTools && claude</div>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num-col">4</div>
+      <div class="step-body">
+        <h3>Run the two interviews</h3>
+        <p>Go to <a onclick="showPage('interview')" style="color:var(--red);font-weight:600">Interviews</a> and run the Firm Brain interview, then the Pipeline interview. This is the real start of the build.</p>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num-col">5</div>
+      <div class="step-body">
+        <h3>Set up GitHub + Vercel deployment</h3>
+        <p>Tell Claude Code: <em>"Set up this project with GitHub version control and Vercel deployment — a main branch for production, a staging branch for testing, and branch protection requiring review before merging to main."</em></p>
+        <p>From then on: build → test on staging → <code style="background:#eee;padding:1px 5px;border-radius:2px;font-size:.78rem">git push origin staging</code> → review → <code style="background:#eee;padding:1px 5px;border-radius:2px;font-size:.78rem">git push origin main</code> → live in 60 seconds.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-green">
+      ✅ <strong>That's the whole one-time setup.</strong> Everything after this is just: go to <a onclick="showPage('pipeline')" style="color:var(--green);font-weight:700">The Pipeline</a> or <a onclick="showPage('skills')" style="color:var(--green);font-weight:700">Team Skills</a>, copy a prompt, paste it, build.
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>🚀 <strong style="color:var(--white)">Best Legal Accelerator</strong> &nbsp;|&nbsp;
+  <a onclick="showPage('home')">Home</a> &nbsp;|&nbsp;
+  <a onclick="showPage('interview')">Interviews</a> &nbsp;|&nbsp;
+  <a onclick="showPage('pipeline')">Pipeline</a> &nbsp;|&nbsp;
+  <a href="https://bestlegalaccelerator.com" target="_blank">bestlegalaccelerator.com</a></p>
+  <p style="margin-top:.4rem">© 2025 BestLegalChoice, Inc. All Rights Reserved.</p>
+</footer>
+
+</div>
+<!-- END PAGE: GUIDE -->
+
+<!-- ══════════ PAGE: APPLY ══════════ -->
+<div id="page-apply" class="page">
+
+<div style="background:var(--black);color:var(--white);text-align:center;padding:3rem 1.5rem 2.5rem;border-bottom:4px solid var(--red)">
+  <p style="font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#f5c518;margin-bottom:.7rem">⭐ Done-For-You Setup</p>
+  <h1 style="font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:800;line-height:1.15;margin-bottom:.5rem">Let Our Team Build Your Pipeline</h1>
+  <p style="font-size:.92rem;color:#aaa;max-width:520px;margin:0 auto;line-height:1.65">We run both interviews with you, build your pipeline tools, and keep everything updated.</p>
+</div>
+
+<div style="max-width:680px;margin:2.5rem auto;padding:0 1.5rem 4rem">
+  <div class="card" style="border-top:3px solid var(--red);margin-bottom:2rem">
+    <p style="font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:.8rem">What's included</p>
+    <ul style="list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:4px">
+      <li style="font-size:.84rem;color:var(--gray);padding:4px 0;display:flex;gap:8px"><span style="color:var(--red);font-weight:700">✓</span> Both interviews run with you</li>
+      <li style="font-size:.84rem;color:var(--gray);padding:4px 0;display:flex;gap:8px"><span style="color:var(--red);font-weight:700">✓</span> Your first 3 pipeline tools built</li>
+      <li style="font-size:.84rem;color:var(--gray);padding:4px 0;display:flex;gap:8px"><span style="color:var(--red);font-weight:700">✓</span> Ongoing support</li>
+      <li style="font-size:.84rem;color:var(--gray);padding:4px 0;display:flex;gap:8px"><span style="color:var(--red);font-weight:700">✓</span> New tools as we build them</li>
+    </ul>
+  </div>
+
+  <div style="border-radius:8px;overflow:hidden;min-height:695px">
+    <iframe src="https://api.leadconnectorhq.com/widget/form/ZTyI3CM7hBjVBJ5nNOqa"
+      style="width:100%;height:695px;border:none;border-radius:8px;display:block"
+      id="inline-ZTyI3CM7hBjVBJ5nNOqa"
+      data-layout='{"id":"INLINE"}' data-trigger-type="alwaysShow"
+      data-activation-type="alwaysActivated" data-deactivation-type="neverDeactivate"
+      data-form-name="Claude Law Firm Agents" data-height="695"
+      data-layout-iframe-id="inline-ZTyI3CM7hBjVBJ5nNOqa"
+      data-form-id="ZTyI3CM7hBjVBJ5nNOqa" title="Claude Law Firm Agents">
+    </iframe>
+  </div>
+
+  <div style="text-align:center;margin-top:1.5rem">
+    <button onclick="showPage('home')" class="btn-dark">← Back to Home</button>
+  </div>
+</div>
+
+<footer>
+  <p>🚀 <strong style="color:var(--white)">Best Legal Accelerator</strong> &nbsp;|&nbsp;
+  <a onclick="showPage('home')">Home</a> &nbsp;|&nbsp;
+  <a onclick="showPage('interview')">Interviews</a> &nbsp;|&nbsp;
+  <a href="https://bestlegalaccelerator.com" target="_blank">bestlegalaccelerator.com</a></p>
+  <p style="margin-top:.4rem">© 2025 BestLegalChoice, Inc. All Rights Reserved.</p>
+</footer>
+
+</div>
+<!-- END PAGE: APPLY -->
+
+<script src="https://link.msgsndr.com/js/form_embed.js"></script>
+<script>
+function showPage(name) {
+  var pages = ['home','interview','pipeline','skills','guide','apply'];
+  for (var i=0;i<pages.length;i++) {
+    var el = document.getElementById('page-'+pages[i]);
+    if (el) el.style.display = (pages[i]===name) ? 'block' : 'none';
+    var nav = document.getElementById('nav-'+pages[i]);
+    if (nav) nav.classList.toggle('active', pages[i]===name);
+  }
+  window.scrollTo(0,0);
+}
+function toggleSkill(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  el.style.display = (el.style.display === 'none' || !el.style.display) ? 'block' : 'none';
+}
+function copyPrompt(id, btn) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  navigator.clipboard.writeText(el.textContent.trim()).then(function(){
+    var orig = btn.textContent;
+    btn.textContent = '✅ Copied!';
+    setTimeout(function(){ btn.textContent = orig; }, 2000);
+  }).catch(function(){
+    var ta = document.createElement('textarea');
+    ta.value = el.textContent.trim();
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    var orig = btn.textContent;
+    btn.textContent = '✅ Copied!';
+    setTimeout(function(){ btn.textContent = orig; }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>
